@@ -12,6 +12,7 @@ datetime是一个关于时间的库，主要包含的类有：
 ### 1.date模块
 ### datatime.date
 ##### 获取当前日期 
+
 ```
 tday= date.today()
 
