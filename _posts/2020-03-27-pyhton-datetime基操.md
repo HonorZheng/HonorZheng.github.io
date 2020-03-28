@@ -1,5 +1,5 @@
-﻿#       datetime 模块
-
+﻿datetime 模块
+===
 datetime是一个关于时间的库，主要包含的类有：
 
 * datetime.date：表示日期的类。常用的属性有year, month, day；
@@ -108,14 +108,11 @@ print  'hour: %d, minute: %d, second: %d, microsecond: %d'
 tm1 = tm.replace(hour = 20 ) 
 print  ('tm1:' , tm1 )
 print  ('isoformat():' , tm.isoformat())
-
 >>> 
- tm: 23:46:10  
- hour: 23, minute: 46, second: 10, microsecond: 0  
- tm1: 20:46:10  
- isoformat(): 23:46:10
-
-
+tm: 23:46:10  
+hour: 23, minute: 46, second: 10, microsecond: 0  
+tm1: 20:46:10  
+isoformat(): 23:46:10
 ```
 
 ### 3.datatime模块
@@ -126,7 +123,8 @@ datetime.datetime (year, month, day[ , hour[ , minute[ , second[ , microsecond[ 
 ```
 各参数的含义与date、time的构造函数中的一样，要注意参数值的范围。
 
-* datetime类定义的类属性与方法：
+**datetime类定义的类属性与方法：**
+
 ```
 datetime.min、datetime.max：datetime所能表示的最小值与最大值；
 datetime.resolution：datetime最小单位；
@@ -138,7 +136,9 @@ datetime.utcfromtimestamp(timestamp)：根据时间戮创建一个datetime对象
 datetime.combine(date, time)：根据date和time，创建一个datetime对象；
 datetime.strptime(date_string, format)：将格式字符串转换为datetime对象；
 ```
+
 实例
+
 ```
 dt = datetime.now() 
 print  ((%Y-%m-%d %H:%M:%S %f): ' , dt.strftime( '%Y-%m-%d %H:%M:%S %f' ))
@@ -198,6 +198,7 @@ def datetime_toTimestamp(dateTim):
 
 ```
 ## 附表
+
 格式字符及意义
 ===
 ```
