@@ -1,5 +1,5 @@
-#                 datetime 模块
-
+datetime 模块
+===
 datetime是一个关于时间的库，主要包含的类有：
 
 * datetime.date：表示日期的类。常用的属性有year, month, day；
@@ -103,17 +103,17 @@ time.strftime(fmt)：返回自定义格式化字符串。在下面详细介绍
 from datetime import time
 tm = time(23 , 46 , 10 ) 
 print ( 'tm:' , tm ）
-print  'hour: %d, minute: %d, second: %d, microsecond: %d' \ 
+print  'hour: %d, minute: %d, second: %d, microsecond: %d' 
     % (tm.hour, tm.minute, tm.second, tm.microsecond) 
 tm1 = tm.replace(hour = 20 ) 
 print  ('tm1:' , tm1 )
 print  ('isoformat():' , tm.isoformat())
-  ``
-# # ---- 结果 ----  
-# tm: 23:46:10  
-# hour: 23, minute: 46, second: 10, microsecond: 0  
-# tm1: 20:46:10  
-# isoformat(): 23:46:10
+
+>>> 
+ tm: 23:46:10  
+ hour: 23, minute: 46, second: 10, microsecond: 0  
+ tm1: 20:46:10  
+ isoformat(): 23:46:10
 
 
 ```
