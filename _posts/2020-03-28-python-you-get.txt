@@ -1,7 +1,6 @@
 1. 打开cmd，输入命令并执行
 pip3 install you-get
 
-2. 打开cmd输入命令
 2.输入命令，检测 You-Get 是否安装成功
 you-get
 
