@@ -1,5 +1,4 @@
 #          datetime 模块
-===
 datetime是一个关于时间的库，主要包含的类有：
 
 * datetime.date：表示日期的类。常用的属性有year, month, day；
