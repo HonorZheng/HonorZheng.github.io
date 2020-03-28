@@ -1,3 +1,8 @@
+---
+layout: post
+title:  "Welcome to Jekyll!"
+---
+
 #	datetime 模块
 
 datetime是一个关于时间的库，主要包含的类有：
