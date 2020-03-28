@@ -1,3 +1,4 @@
+## 切记 windows系统保存为utf-8格式
 ## jekyll-theme-H2O
 
 基于Jekyll的博客主题模板，简洁轻量。
