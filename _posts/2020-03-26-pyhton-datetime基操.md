@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "	datetime 模块!"
 ---
 
 #	datetime 模块
