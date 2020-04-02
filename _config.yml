@@ -1,87 +1,53 @@
-# Site settings 配置站点
-title: 'Sukhoi的独立博客'
-description: '菜鸟程序员。很高兴能在这里与你分享我对技术和生活的思考。'
-keyword: 'Sukhoi, 人生苦短，I choose python'
-url: '' # your host
-
-# when build blog on server, if you don't need baseurl, you should leave this value blank.
-# 在服务器上建站时，如果你不需要子域名，请将这一格留空
-# if you're using GitHub Pages, set baseurl to your blog's .
-# 如果你在使用 GitHub Pages, 请将 baseurl 设置为你的网址的子域名
-# for example, if your site is "kaeyleo.github.io", then this url should leave blank.
-# 例如，当你的域名是 "kaeyleo.github.io"  时，这个 url 需要留空
-# but if your created a repo named "myblog", and the site is "kaeyleo.github.io/myblog", change baseurl to '/myblog'
-# 但是，如果你创建了一个叫 "myblog" 的网站，此时网址会变成 "kaeyleo.github.io/myblog" ，这时再将 baseurl 设置为 '/myblog'
+# Created by Jekyll Writer
+title: "Sukhoiç\x9A\x84ç\x8B¬ç«\x8Bå\x8D\x9Aå®¢"
+description: "è\x8F\x9Cé¸\x9Fç¨\x8Båº\x8Få\x91\x98ã\x80\x82å¾\x88é«\x98å\N´è\x83½å\x9C¨è¿\x99é\x87\x8Cä¸\x8Eä½\_å\x88\x86äº«æ\x88\x91å¯¹æ\x8A\x80æ\x9C¯å\x92\x8Cç\x94\x9Fæ´»ç\x9A\x84æ\x80\x9Dè\x80\x83ã\x80\x82"
+keyword: "Sukhoi, äººç\x94\x9Fè\x8B¦ç\x9F­ï¼\x8CI choose python"
+url: ''
 baseurl: ''
-
-# Navigation links
 nav:
-  home: '/'
-  tags: '/tags.html'
-
-# Footer
+  home: /
+  tags: /tags.html
 footer:
   since: 2017
-
-# Author 配置博主信息
-author: 'Sukhoi'
+author: Sukhoi
 nickname: ''
-bio: 'Python小菜鸡，简单乐观爱创造'
-avatar: '/assets/img/profile.png'
-
-# Search
+bio: "Pythonå°\x8Fè\x8F\x9Cé¸¡ï¼\x8Cç®\x80å\x8D\x95ä¹\x90è§\x82ç\x88±å\x88\x9Bé\x80\_"
+avatar: /assets/img/profile.png
 search: true
-
-# Night mode
 nightMode: true
-
-# Comments 评论功能
 comments:
   disqus: false
   disqus_url: 'https://liaokeyu.disqus.com/embed.js'
-
-# MathJax 公式支持 by Ray-Eldath
 mathjax: true
-
-# Share
 social-share: true
-social-share-items: ['wechat', 'weibo', 'douban', 'twitter']
-
-# theme color 主题皮肤
-theme-color: 'default'  # pink or default
-
-# Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
-postPatterns: 'circuitBoard'
-
-# SNS settings 配置社交网站
-# url: email, weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
+social-share-items:
+  - wechat
+  - weibo
+  - douban
+  - twitter
+theme-color: default
+postPatterns: circuitBoard
 sns:
   weibo: ''
   juejin: ''
   instagram: ''
   github: ''
-
-# Tags 设置标签
-recommend-tags: true # whether or not display recommend-tags on the sidebar
-recommend-condition-size: 12 # a tag will be recommended if the size of it is more than this value
-
-# Build settings
+recommend-tags: true
+recommend-condition-size: 12
 paginate: 10
 paginate_path: 'page:num'
-exclude: ['node_modules', 'dev', 'package.json', 'gulpfile.js', '.gitignore', 'README.md']
-
-# Markdown
+exclude:
+  - node_modules
+  - dev
+  - package.json
+  - gulpfile.js
+  - .gitignore
+  - README.md
 markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM
-
-# RSS
 RSS: false
-
-# Permalink
-# See: https://github.com/kaeyleo/jekyll-theme-H2O/issues/35
-permalink: /:year/:month/:day/:title.html
-
-# Plugins
-plugins: [jekyll-paginate]
+permalink: '/:year/:month/:day/:title.html'
+plugins:
+  - jekyll-paginate
