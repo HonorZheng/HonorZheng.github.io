@@ -1,7 +1,7 @@
 # Created by Jekyll Writer
-title: "Sukhoiç\x9A\x84ç\x8B¬ç«\x8Bå\x8D\x9Aå®¢"
-description: "è\x8F\x9Cé¸\x9Fç¨\x8Båº\x8Få\x91\x98ã\x80\x82å¾\x88é«\x98å\N´è\x83½å\x9C¨è¿\x99é\x87\x8Cä¸\x8Eä½\_å\x88\x86äº«æ\x88\x91å¯¹æ\x8A\x80æ\x9C¯å\x92\x8Cç\x94\x9Fæ´»ç\x9A\x84æ\x80\x9Dè\x80\x83ã\x80\x82"
-keyword: "Sukhoi, äººç\x94\x9Fè\x8B¦ç\x9F­ï¼\x8CI choose python"
+title: "Sukhoi的独立博客"
+description: "python使我快乐"
+keyword: "Sukhoi, Life is short, I choose python"
 url: ''
 baseurl: ''
 nav:
@@ -11,7 +11,7 @@ footer:
   since: 2017
 author: Sukhoi
 nickname: ''
-bio: "Pythonå°\x8Fè\x8F\x9Cé¸¡ï¼\x8Cç®\x80å\x8D\x95ä¹\x90è§\x82ç\x88±å\x88\x9Bé\x80\_"
+bio: "Python小菜鸡，保持激情"
 avatar: /assets/img/profile.png
 search: true
 nightMode: true
