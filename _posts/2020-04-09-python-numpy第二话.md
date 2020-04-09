@@ -17,6 +17,7 @@ def array_split(data, timeslip):
 
 # todo step 2,对三维数组进行滑动的平均，平均方式为阶梯型，阶梯值为1，代表连续
 
+```
 def slide_mean(data, timeslip):
     # 构造空矩阵 data.shape[0]为长度，由于滑动timeslip,新的矩阵长度增加
     meanvalue = np.zeros((data.shape[0], data.shape[2]))
@@ -35,3 +36,4 @@ def slide_mean(data, timeslip):
         data_3D = np.hstack((data_3D, b))
         # 如果一轮完全迭代
     return meanvalue
+```
