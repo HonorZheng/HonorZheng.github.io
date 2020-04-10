@@ -1,7 +1,7 @@
 ---
 title: python-numpy第二话
 layout: post
-tags: pyhon-numpy
+tags: python-numpy
 categories: ''
 ---
 # todo 由于数组的滑动，数据量发生重叠而增加，此处代码用于将重叠区域的风速取平均，并整合成
