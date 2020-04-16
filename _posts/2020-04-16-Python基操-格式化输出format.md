@@ -6,7 +6,7 @@ tags: Python基操
 Python格式化输出——format
 
 作者 ：AwesomeTang
-https://www.jianshu.com/p/98971acbd426
+`https://www.jianshu.com/p/98971acbd426`
 
 format OR %
 提到Python中的格式化输出方法，一般来说有以下两种方式：
