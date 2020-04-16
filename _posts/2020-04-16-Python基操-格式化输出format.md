@@ -6,10 +6,11 @@ tags: Python基操
 Python格式化输出——format
 
 作者 ：AwesomeTang
-`[原文链接地址][https://www.jianshu.com/p/98971acbd426]`
+[原文链接地址][https://www.jianshu.com/p/98971acbd426]
 
-format OR %
+**format 或者 %**
 提到Python中的格式化输出方法，一般来说有以下两种方式：
+
 ```markdown
 print('hello %s' % 'world')
 # hello world
@@ -19,9 +20,9 @@ print('hello {}'.format('world'))
 
 到底哪种好呢，反正对我来说，用了.format()之后就再也不想用%了。
 
-format()不用理会数据类型，%s，%f等等我记不完；
-format()功能更丰富，填充方式，对齐方式都很灵活，让你的打印效果更美观；
-format()是官方推荐的，%指不定就在未来版本中给废弃掉了。
+1. format()不用理会数据类型，%s，%f等等我记不完；
+2. format()功能更丰富，填充方式，对齐方式都很灵活，让你的打印效果更美观；
+3. format()是官方推荐的，%指不定就在未来版本中给废弃掉了。
 
 **基本用法**
 ```markdown
@@ -53,6 +54,7 @@ print('{name}说："我的名字是{name},我今年{age}岁了。"'.format(name=
 ```
 
 **可变参数**
+
 既然format()是一个方法，那是不是也接受*args和**kwargs形式的传参呢，答案是肯定的。
 
 ```
@@ -231,5 +233,4 @@ for i in range(1, length + 1):
 print('\n')
 ```
 
-
-[]: https://www.jianshu.com/p/98971acbd426
+![](.2020-04-16-Python基操-格式化输出format_images/364b02e6.png)
