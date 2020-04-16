@@ -176,7 +176,7 @@ print  (今周是今年的第%s周 ' % dt.strftime( '%U' ))
 def datetime_toString(dt): 
   return dt.strftime("%Y-%m-%d-%H") 
  ``` 
- ###### 把字符串转成datetime 
+###### 把字符串转成datetime 
 ```
 def string_toDatetime(string): 
   return datetime.strptime(string, "%Y-%m-%d-%H") 
