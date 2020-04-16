@@ -1,6 +1,7 @@
 ---
 title: Python基操——格式化输出format
 layout: post
+tags: Python基操
 ---
 Python格式化输出——format
 
