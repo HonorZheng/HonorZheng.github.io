@@ -3,12 +3,13 @@ title: Python基操-格式化输出format
 layout: post
 tags: Python基操
 ---
-Python格式化输出——format
+Python格式化输出—format
 
 作者 ：AwesomeTang
-[原文链接地址][https://www.jianshu.com/p/98971acbd426]
+原文链接地址[https://www.jianshu.com/p/98971acbd426]
 
 **format 或者 %**
+
 提到Python中的格式化输出方法，一般来说有以下两种方式：
 
 ```markdown
@@ -84,7 +85,9 @@ hello world 我的名字是小明,我今年12岁了,hello!
 ```
 
 **固定宽度**
+
 format()可以指定输出宽度为多少，当字符串长度少于设定值的时候，默认用空格填充：
+
 ```markdown
 data = [{'name': 'Mary', 'college': 'Tsinghua University'},
         {'name': 'Micheal', 'college': 'Harvard University'},
@@ -124,6 +127,7 @@ James     Massachusetts Institute of Technology
 ```
 
 **对齐方式**
+
 format()支持左对齐，右对齐，居中，分别对应<，>，^，具体怎么使用我们看实例：
 ```markdown
 data = [{'name': 'Mary', 'college': 'Tsinghua University'},
@@ -208,6 +212,7 @@ print('八进制：{:o}'.format(num))
 ```
 
 **输出花括号**
+
 当然，如果我们想输出的{}的时候怎么办呢？
 ```markdown
 # 输出花括号
@@ -220,6 +225,7 @@ print('我是{{{}}}'.format('Awesome_Tang'))
 ```
 
 **花式玩法**
+
 其实结合以上这些特性，我们可以来点好玩点，譬如说自己写一个进度条：
 ```markdown
 import time
