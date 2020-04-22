@@ -240,3 +240,14 @@ print('\n')
 ```
 
 ![](.2020-04-16-Python基操-格式化输出format_images/364b02e6.png)
+
+
+### 补充一个功能
+
+使用f和{}的组合，轻松操作格式化字符
+
+```markdown
+age = int(input("Please input your age:"))
+name = input("Please input your name:")
+print(f"Ok,your name is {age}, and your age is {name}." )
+```
