@@ -216,7 +216,7 @@ print('八进制：{:o}'.format(num))
 当然，如果我们想输出的{}的时候怎么办呢？
 ```markdown
 # 输出花括号
-print('我是{{{}}}'.format('Awesome_Tang'))
+print('我是 {{{}}}'.format('Awesome_Tang'))
 
 """输出结果
 我是{Awesome_Tang}
