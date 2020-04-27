@@ -6,7 +6,7 @@ tags: Python基操
 Python格式化输出—format
 
 作者 ：AwesomeTang
-原文链接地址[https://www.jianshu.com/p/98971acbd426]
+ [https://www.jianshu.com/p/98971acbd426][原文链接地址]
 
 **format 或者 %**
 
@@ -251,3 +251,6 @@ age = int(input("Please input your age:"))
 name = input("Please input your name:")
 print(f"Ok,your name is {age}, and your age is {name}." )
 ```
+
+
+[]: https://www.jianshu.com/p/98971acbd426
