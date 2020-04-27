@@ -6,7 +6,7 @@ tags: Python基操
 Python格式化输出—format
 
 作者 ：AwesomeTang
- [https://www.jianshu.com/p/98971acbd426][原文链接地址]
+ [原文链接地址](https://www.jianshu.com/p/98971acbd426)
 
 **format 或者 %**
 
