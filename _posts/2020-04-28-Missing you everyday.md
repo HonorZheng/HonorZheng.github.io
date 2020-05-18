@@ -3,8 +3,8 @@ title: Missing you everyday
 layout: post
 tags: Missing_you_everyday
 ---
-			###写个老板娘的情书
-Dear baby：
+###写个老板娘的情书
+Dear baby：<br>
 
 	初识汝面，汝谈吐优雅，含羞似莲，余如沐春风；<br>
 	细视之，素颜玲珑，柳眉星眼，今夕何夕，见此良人，心之爱意，油然而生；<br>
@@ -13,7 +13,7 @@ Dear baby：
 	既往数日，时刻思卿，一日不见，如隔三秋，花是卿，云也是卿；<br>
 	遂以此笺，表余之心意；<br>
 	盼携卿之手，逐梦爱河；<br>
-												love you, kan
+												Love you, Kan
 											
 									
 
