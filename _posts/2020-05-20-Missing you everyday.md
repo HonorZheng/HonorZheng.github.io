@@ -16,5 +16,4 @@ Dear baby：<br>
 　　盼携卿之手，逐梦爱河；<br>
 
 　　　　　　　　　　　　　　　　　　　　　　　　　　Love you, Kan
-
 　　　　　　　　　　　　　　　　　　　　　　　　　　　2020.05.20
