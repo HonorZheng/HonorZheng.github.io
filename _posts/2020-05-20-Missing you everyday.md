@@ -4,7 +4,7 @@ layout: post
 tags: Missing_you_everyday
 ---
 
-### 写个老板娘的情书
+### 写给老板娘的情书
 
 Dear baby：<br>
 　　初识汝面，汝谈吐优雅，含羞似莲，余如沐春风；  <br>
