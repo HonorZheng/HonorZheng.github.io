@@ -167,4 +167,66 @@ categories: ''
             [1., 7.],
             [0., 3.],
             [8., 6.]])]
+            
+#### 7.numpy 赋值的联动性[1.等号赋值]
+    >>> 如果单纯使用 = 赋值，地址相同，一个改变，另一个也改变 
+    #Simple assignments make no copy of array objects or of their data.
+    a = np.arange(12)
+    b = a
+    # a and b are two names for the same ndarray object
+    print(b is a)
+    b.shape = 3,4
+    print (a.shape)
+    print (id(a))
+    print (id(b))
+    print(a)
+    >>>
+    True
+    (3, 4)
+    3110677184064
+    3110677184064
+    [[ 0  1  2  3]
+     [ 4  5  6  7]
+     [ 8  9 10 11]]
+     
+#### 8.numpy 赋值的联动性[2.view()赋值]   
+    >>> 
+    #The view method creates a new array object that looks at the same data.
+    # 此时改动C，也是改动a，地址不同，但是联动
+    c = a.view()
+    print(c is a)
+    c.shape = 2,6
+    #print a.shape
+    c[0,4] = 1234
+    print(a)
+    print (id(a))
+    print (id(c))
+    >>>
+    False
+    [[   0    1    2    3]
+     [1234    5    6    7]
+     [   8    9   10   11]]
+    1585806290736
+    1585791641040
 
+#### 9.numpy 赋值的联动性[3.copy()赋值] 
+    >>>
+    #The copy method makes a complete copy of the array and its data.
+    # 此时为独立的两个值，改动d无关a，地址不同，也不联动
+    d = a.copy() 
+    print(d is a)
+    d[0,0] = 9999
+    print (d )
+    print (a)
+    print (id(a))
+    print (id(c))
+    >>>
+    False
+    [[9999    1    2    3]
+     [1234    5    6    7]
+     [   8    9   10   11]]
+    [[   0    1    2    3]
+     [1234    5    6    7]
+     [   8    9   10   11]]
+    1585806290736
+    1585791641040
