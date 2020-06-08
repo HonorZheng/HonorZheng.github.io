@@ -81,6 +81,7 @@ categories: ''
     >>>
     [False  True  False]
     [[20 25 30]]
+    
 #### 7. np布尔运算的选取功能[3]-复合项布尔运算
     >>>
     #We can also perform comparisons with multiple conditions
@@ -97,7 +98,8 @@ categories: ''
     print(vector)
     >>>
     [50 50 15 20]
-#### 7. np数组数据类型的改变
+    
+#### 8. np数组数据类型的改变
     >>>
     #We can convert the data type of an array with the ndarray.astype() method.
     vector = numpy.array(["1", "2", "3"])
@@ -112,7 +114,7 @@ categories: ''
     float64
     [1. 2. 3.]
 
-#### 7. np数学运算
+#### 9. np数学运算
     # 一维数组求和
     vector = numpy.array([5, 10, 15, 20])
     vector.sum()
@@ -134,7 +136,7 @@ categories: ''
     >>> matrix.sum(axis=0)
     >>> array([60, 75, 90])
  
-#### 7. np替换空值
+#### 10. np替换空值
     #replace nan value with 0
     >>>
     world_alcohol = numpy.genfromtxt("world_alcohol.txt", delimiter=",")
