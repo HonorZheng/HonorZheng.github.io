@@ -80,3 +80,91 @@ categories: ''
      
     [[5 4]
      [3 4]]
+     
+#### 4.numpy 拉平数组(ravel,reshape)
+
+    >>>
+    #Return the floor of the input
+    a = np.floor(10*np.random.random((3,4)))
+    print (a)
+    
+    # flatten the array
+    print (a.ravel())
+    
+    #If a dimension is given as -1 in a reshaping operation, 
+    the other dimensions are automatically calculated:
+    a.reshape(4,-1)
+    print(a)
+    >>>
+    [[4. 3. 3. 9.]
+     [1. 8. 5. 1.]
+     [3. 6. 4. 5.]]
+     
+    [4. 3. 3. 9. 1. 8. 5. 1. 3. 6. 4. 5.]
+    
+    [[4. 3. 3. 9.]
+     [1. 8. 5. 1.]
+     [3. 6. 4. 5.]]
+     
+#### 5.numpy 水平拼接(hstack) 垂直拼接（vstack）
+    
+    >>>
+    a = np.floor(10*np.random.random((2,2)))
+    b = np.floor(10*np.random.random((2,2)))
+    print (a)
+    print ('---')
+    print (b)
+    print ('---')
+    print (np.hstack((a,b))) 
+    
+   >>> 
+    [[9. 2.]
+     [6. 8.]]
+    ---
+    [[7. 8.]
+     [7. 6.]]
+    ---
+    [[9. 2. 7. 8.]
+     [6. 8. 7. 6.]]
+     
+#### 6.numpy 水平分割(hsplit) 垂直分割（vsplit）
+    >>>
+    a = np.floor(10*np.random.random((2,12)))
+    print (a)
+    print (np.hsplit(a,3))
+    # Split a after the third and the fourth column（在第四列分割，然后形成三个段，1-3,4,5-12）
+    # print np.hsplit(a,(3,4))  
+    a = np.floor(10*np.random.random((12,2)))
+    print (a)
+    np.vsplit(a,3)
+    
+    >>>
+    [[5. 4. 6. 7. 5. 7. 7. 3. 0. 8. 5. 8.]
+     [5. 5. 2. 0. 9. 3. 3. 3. 0. 1. 1. 7.]]
+    [array([[5., 4., 6., 7.],
+           [5., 5., 2., 0.]]), array([[5., 7., 7., 3.],
+           [9., 3., 3., 3.]]), array([[0., 8., 5., 8.],
+           [0., 1., 1., 7.]])]
+    [[7. 7.]
+     [8. 1.]
+     [5. 1.]
+     [1. 8.]
+     [2. 3.]
+     [0. 2.]
+     [8. 4.]
+     [7. 4.]
+     [2. 2.]
+     [1. 7.]
+     [0. 3.]
+     [8. 6.]]
+    [array([[7., 7.],
+            [8., 1.],
+            [5., 1.],
+            [1., 8.]]), array([[2., 3.],
+            [0., 2.],
+            [8., 4.],
+            [7., 4.]]), array([[2., 2.],
+            [1., 7.],
+            [0., 3.],
+            [8., 6.]])]
+
