@@ -4,7 +4,7 @@ layout: post
 tags: python-numpy
 categories: ''
 ---
-### 1. numpy.array() 矩阵生成(一维数组和二维矩阵)
+#### 1. numpy.array() 矩阵生成(一维数组和二维矩阵)
 
     >>>
     #  numpy.array() 能输入一个list，一个list就是一维数组
