@@ -21,6 +21,8 @@ Docker
 
 https://www.cnblogs.com/zpcoding/p/11450686.html#_label0_0
 
+https://zhuanlan.zhihu.com/p/45625808
+
 Flask 基础 
 
 python环境的安装
