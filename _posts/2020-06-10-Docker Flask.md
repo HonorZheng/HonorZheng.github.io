@@ -43,3 +43,12 @@ pipenv 集成了pip + virtualenv + requirement.txt ，使得生成独立的开�
 
 
 
+激活虚拟环境
+
+         pipenv shell 
+
+安装flask
+
+	pipenv install flask
+
+
