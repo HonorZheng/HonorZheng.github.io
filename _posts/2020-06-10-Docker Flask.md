@@ -7,9 +7,15 @@ categories: ''
 ---
 Docker
 
+## **知乎上的帖子**
+
+* [Docker的三大核心组件：镜像，容器与仓库]
+	<https://zhuanlan.zhihu.com/p/81665431>
+
 
 [docker入门(利用docker部署web应用)]
 (https://blog.csdn.net/q610376681/article/details/90483576)
+
 
 [docker系列学习（二）：Docker + Flask 例子]
 
