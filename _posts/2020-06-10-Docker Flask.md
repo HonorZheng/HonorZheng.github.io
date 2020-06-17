@@ -23,9 +23,9 @@ https://www.cnblogs.com/zpcoding/p/11450686.html#_label0_0
 
 https://zhuanlan.zhihu.com/p/45625808
 
-Flask 基础 
+### Flask 基础 
 
-python环境的安装
+#### Part 1 python环境的安装
 
 pipenv 集成了pip + virtualenv + requirement.txt ，使得生成独立的开发环境更加便捷
 
@@ -49,6 +49,43 @@ pipenv 集成了pip + virtualenv + requirement.txt ，使得生成独立的开�
 
 安装flask
 
-	pipenv install flask
+         pipenv install flask
+
+#### Part 2 Flask运行
+
+**2.1 flask run**
+
+如果脚本命名为app.py或wsgi.py，那么在包含程序脚本的目录下直接调用flask run即可：
+
+	$ flask run
+
+Flask会自动探测找到脚本中的程序实例并启动。如果脚本命名为其他名称，比如hello.py，那么需要将脚本名写入环境变量FLASK_APP，然后再调用flask run命令：
+
+	$ export FLASK_APP=hello
+
+	$ flask run
+
+提示 在Windows系统下，你需要使用set命令来设置环境变量，比如 > set FLASK_APP=hello，后面的命令亦同。
+
+使用包组织的程序，这种情况下，可以将包含程序实例的对应模块的路径写入FLASK_APP：
+
+	$ export FLASK_APP=my_pkg.app
+
+	$ flask run
+
+**2.2 生产/开发环境设置**
+
+设置开发环境，其自动打开debugger 和 reloader
+
+	$ export FLASK_ENV=development
+
+
+
+
+
+
+
+
+
 
 
