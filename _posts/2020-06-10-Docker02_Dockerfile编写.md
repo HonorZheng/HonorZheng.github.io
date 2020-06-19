@@ -20,13 +20,23 @@ https://zhuanlan.zhihu.com/p/45625808
 1. ‘ #’ 为注释
 2. 指令为大写，内容为小写
 
-流程
+### 流程
 
 1. docker从基础镜像运行一个容器
+
 2. 执行一条命令并对容器作出修改
+
 3. 执行类似docker commit的操作提交一个新的镜像层
+
 4. docker再基于刚提交的运行一个新容器
+
 5. 执行dockfile中的下一条指令，直到运行完所有的指令
+
+   
+
+   #### dockerfile面向开发，docker镜像成为交付标准，docker容器涉及部署和运维
+
+   <img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200619141630235.png" alt="image-20200619141630235" style="zoom: 67%;" />
 
 ### 核心Dockerfile指令
 
@@ -36,17 +46,23 @@ https://zhuanlan.zhihu.com/p/45625808
 
   ADD将本地文件到镜像中
 
-  
-
 * RUN/ENV 指令
 
   
 
 **FROM**
-参数是镜像。必须是dockerfile中的第一条非注释指令。
+后面放基础镜像，参数是镜像。必须是dockerfile中的第一条非注释指令。
+
+```dockerfile
+FROM  scratch
+```
 
 **MAINTAINER**
 指定镜像的作者信息，包含镜像的所有者和联系信息。
+
+```dockerfile
+MAINTAINER zhengkan<zhengkan1993@gmail.com>
+```
 
 **RUN**
 
@@ -57,25 +73,58 @@ https://zhuanlan.zhihu.com/p/45625808
    例如：`RUN["/bin/bash","-c","echo hello"]`
 
 **EXPOSE**
-指定运行该镜像的容器使用的端口，处于安全考虑，docker并不会打开该端口，而是使用run命令手动的添加对端口的映射。
+指定运行该镜像的容器使用的端口。
+
+处于安全考虑，docker并不会打开该端口，而是使用run命令手动的添加对端口的映射。
 
 **CMD**
 用来提供容器运行的默认命令。命令可以被docker run中的指令所覆盖。
 
+即只运行dockerfile中最后一个CMD
+
 - exec模式：`CMD["executable","arg1","arg2"]`
+
 - shell模式：`CMD command arg1,arg2`
 
+  ```dockerfile
+  FROM centos
+  RUN yum install -y curl
+  CMD ['curl','-s','http://ip.cn']
+  ```
+
 **ENTRYPOINT**
-不会被docker run命令中的命指令所覆盖。
+
+与CMD功能一样，但是：
+
+不会被docker run命令中的命指令所覆盖，有它就用它。
 
 - exec模式：`ENTRYPOINT["executable","arg1","arg2"]`
+
 - shell模式：`ENTRYPOINTcommand arg1,arg2`
 
+  ```dockerfile
+  FROM centos
+  RUN yum install -y curl
+  CMD ['curl','-s','http://ip.cn']
+  ENTRYPOINT -i
+  ```
+
+  相当于将 -i 命令插入到 中，如果使用CMD添加-i功能，会被覆盖，不能成功添加；使用ENTRYPOINT可以直接加入并实现。
+
+  > 'curl -s -i  http://ip.cn'
+
 **ADD**
-`ADD["SRC","DEST"]`
+
+```dockerfile
+ADD ["SRC","DEST"]
+```
+
+拷贝+解压缩，比copy命令强大
+
 注：src可以是本地也可以是远程的文件，dest必须是镜像中的绝对路径
 
 **COPY**
+
 `COPY["SRC","DEST"]`
 
 **对比ADD和COPY ：**
@@ -83,15 +132,29 @@ ADD包含类似tar的解压功能；
 如果单纯复制文件，Docker推荐使用COPY。
 
 **VOLUME**
-`VOLUME["/data"]`
+
+容器数据卷，用于数据的保存和持久化
+
+```dockerfile
+VOLUME ["/data"]
+```
+
 向镜像创建的容器添加卷，一个卷可以存在多个容器的特定目录，类似于公共的文件。
 
 **WORKDIR**
-`WORKDIR /PATH`
-指定工作目录。
+
+```dockerfile
+WORKDIR /PATH
+```
+
+指定登录后的工作目录。
 
 **ENV**
-`ENV<key>=<value>`
+
+```dockerfile
+ENV <key>=<value>
+```
+
 一般用于指定环境变量。
 
 **USER USER daemon**
