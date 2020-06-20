@@ -149,7 +149,41 @@ VOLUME ["/data"]
 $ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
 ```
 
+主要可用于主机与宿主机的数据同步，步骤如下：
 
+1. 容器先停止退出，使用docker stop containerID
+
+2. 主机修改a.blog
+
+3. 容器重启进入docker start containerID
+
+4. 查看主机修改过的a.log
+
+   
+
+   **容器和宿主机之间数据共享**
+
+   在容器中修改文件内容, 宿主机中可以发现文件内容发生改变. **“可读可写”**
+
+   **容器停止退出后, 宿主机修改后数据是否同步?**
+
+   同步
+
+   **文件操作权限**
+
+   ```
+   $ docker run -it -v /宿主机绝对路径:/容器内目录:权限 <image_name>
+   ```
+
+   举个🌰子
+
+   ```
+   $ docker run -it -v /hostDataV:/containerDataV:ro <image_name>
+   ```
+
+   `ro` - Read Only, 只读
+
+   在 container 中 执行 `touch container.txt` 会返回错误信息
 
 **WORKDIR**
 
