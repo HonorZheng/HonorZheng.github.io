@@ -15,6 +15,8 @@ https://www.cnblogs.com/zpcoding/p/11450686.html#_label0_0
 
 https://zhuanlan.zhihu.com/p/45625808
 
+https://zhenye-na.github.io/2019/09/29/docker-practical-guide.html 【写的很好
+
 ### 格式
 
 1. ‘ #’ 为注释
@@ -140,6 +142,14 @@ VOLUME ["/data"]
 ```
 
 向镜像创建的容器添加卷，一个卷可以存在多个容器的特定目录，类似于公共的文件。
+
+在用 `docker run` 命令的时候, 使用 `-v` (`volume` 缩写) 标记来创建一个数据卷并挂载到容器里. 在一次 `run` 中多次使用可以挂载多个数据卷
+
+```dockerfile
+$ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
+```
+
+
 
 **WORKDIR**
 
