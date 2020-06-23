@@ -38,7 +38,7 @@ https://zhenye-na.github.io/2019/09/29/docker-practical-guide.html 【写的很�
 
    #### dockerfile面向开发，docker镜像成为交付标准，docker容器涉及部署和运维
 
-   <img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200619141630235.png" alt="image-20200619141630235" style="zoom: 67%;" />
+   <img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200619141630235.png" alt="image-20200619141630235" style="zoom: 50%;" />
 
 ### 核心Dockerfile指令
 
@@ -121,7 +121,8 @@ MAINTAINER zhengkan<zhengkan1993@gmail.com>
 ADD ["SRC","DEST"]
 ```
 
-拷贝+解压缩，比copy命令强大
+- [x] 拷贝+解压缩，比copy命令强大
+
 
 注：src可以是本地也可以是远程的文件，dest必须是镜像中的绝对路径
 
@@ -129,7 +130,9 @@ ADD ["SRC","DEST"]
 
 `COPY["SRC","DEST"]`
 
-**对比ADD和COPY ：**
+- [x] 只是拷贝
+
+**>>>对比ADD和COPY<<< **
 ADD包含类似tar的解压功能；
 如果单纯复制文件，Docker推荐使用COPY。
 
@@ -189,6 +192,7 @@ $ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
 
 ```dockerfile
 WORKDIR /PATH
+WORKDIR $MY_PATH
 ```
 
 指定登录后的工作目录。
@@ -197,6 +201,7 @@ WORKDIR /PATH
 
 ```dockerfile
 ENV <key>=<value>
+ENV $MY_PATH/workdir
 ```
 
 一般用于指定环境变量。
@@ -206,7 +211,9 @@ ENV <key>=<value>
 
 **ONBUILD**
 `ONBUILD [INSTRUCTION]`
-为镜像添加触发器，当一个镜像作为其他镜像的基础镜像时，触发器会执行。在子镜像构建时，插入触发器中的指令。
+为镜像添加触发器，当一个镜像作为其他镜像的基础镜像时，触发器会执行。
+
+在子镜像构建时，插入触发器中的指令。
 
 **4.3.4 Dockerfile的构建过程**
 
@@ -230,7 +237,54 @@ ENV <key>=<value>
 
 
 
+### 案例解析
 
+* 案例一 ：建立镜像
 
+```dockerfile
+FROM centos
+ENV MYPATH 	/usr/local	# 设定MYPATH
+WORKDIR $MYPATH         # 引用MYPATH
+RUN yum -y install vim
+RUN yum -y install net-tools
+EXPOSE 80
+CMD /bin/bash
 
+```
 
+* 案例二 
+
+```dockerfile
+FROM centos
+RUN yum install -y curl
+CMD ["curl","-s","http://ip.cn"]
+```
+
+**ps ：注意选择文件运行**
+
+```
+docker build -f Dockerfile02 -t myip .
+```
+
+* 案例三：ONBUILD命令
+
+dockerfile1文件如下
+
+```dockerfile
+FROM centos
+RUN yum install -y curl
+CMD ["curl","-s","http://ip.cn"]
+ONBUILD RUN echo "father onbuild ----886"
+```
+
+1.构建镜像 docker build -f dockerfile1 -t myip-father，生成镜像myip-father
+
+2.编写dockerfile2,继承myip-father镜像
+
+```dockerfile
+FROM myip-father
+RUN yum install -y curl
+CMD ["curl","-s","http://ip.cn"]
+```
+
+ 3.运行时，就会触发 “father onbuild ----886”命令
