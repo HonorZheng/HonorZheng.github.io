@@ -121,7 +121,7 @@ MAINTAINER zhengkan<zhengkan1993@gmail.com>
 ADD ["SRC","DEST"]
 ```
 
-- [x] 拷贝+解压缩，比copy命令强大
+- [x] 拷贝+解压缩【相当于把SRC文件夹内的内容copy到DEST文件夹中】，比copy命令强大
 
 
 注：src可以是本地也可以是远程的文件，dest必须是镜像中的绝对路径
