@@ -5,24 +5,16 @@ tags: Docker_Flask
 categories: ''
 
 ---
-Dockerfile编写
+# Dockerfile编写
 
+[TOC]
 
-
-[docker---Dockerfile编写] 
-
-https://www.cnblogs.com/zpcoding/p/11450686.html#_label0_0
-
-https://zhuanlan.zhihu.com/p/45625808
-
-https://zhenye-na.github.io/2019/09/29/docker-practical-guide.html 【写的很好
-
-### 格式
+### 1.格式
 
 1. ‘ #’ 为注释
 2. 指令为大写，内容为小写
 
-### 流程
+### 2.流程
 
 1. docker从基础镜像运行一个容器
 
@@ -40,17 +32,7 @@ https://zhenye-na.github.io/2019/09/29/docker-practical-guide.html 【写的很�
 
    <img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200619141630235.png" alt="image-20200619141630235" style="zoom: 50%;" />
 
-### 核心Dockerfile指令
-
-* USER / WORKDIR指令
-
-* ADD/EXPOSR指令
-
-  ADD将本地文件到镜像中
-
-* RUN/ENV 指令
-
-  
+### 3.核心Dockerfile指令
 
 **FROM**
 后面放基础镜像，参数是镜像。必须是dockerfile中的第一条非注释指令。
@@ -113,22 +95,30 @@ MAINTAINER zhengkan<zhengkan1993@gmail.com>
 
   相当于将 -i 命令插入到 中，如果使用CMD添加-i功能，会被覆盖，不能成功添加；使用ENTRYPOINT可以直接加入并实现。
 
-  > 'curl -s -i  http://ip.cn'
+  ```
+  curl -s -i  http://ip.cn
+  ```
 
 **ADD**
 
 ```dockerfile
 ADD ["SRC","DEST"]
+ADD /predict_sales /task01
 ```
 
-- [x] 拷贝+解压缩【相当于把SRC文件夹内的内容copy到DEST文件夹中】，比copy命令强大
+- [x] 拷贝+解压缩
+
+  【相当于把SRC文件夹内的内容copy到DEST文件夹中】，比copy命令强大
 
 
-注：src可以是本地也可以是远程的文件，dest必须是镜像中的绝对路径
+  注：src可以是本地也可以是远程的文件，dest必须是镜像中的绝对路径
 
 **COPY**
 
-`COPY["SRC","DEST"]`
+```
+COPY["SRC","DEST"]
+COPY /predict_sales /task01
+```
 
 - [x] 只是拷贝
 
@@ -146,7 +136,9 @@ VOLUME ["/data"]
 
 向镜像创建的容器添加卷，一个卷可以存在多个容器的特定目录，类似于公共的文件。
 
-在用 `docker run` 命令的时候, 使用 `-v` (`volume` 缩写) 标记来创建一个数据卷并挂载到容器里. 在一次 `run` 中多次使用可以挂载多个数据卷
+在用 `docker run` 命令的时候, 使用 `-v` (`volume` 缩写) 标记来**创建一个数据卷并挂载到容器里**. 
+
+在一次 `run` 中多次使用可以挂载多个数据卷
 
 ```dockerfile
 $ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
@@ -237,7 +229,7 @@ ENV $MY_PATH/workdir
 
 
 
-### 案例解析
+### 4.案例解析
 
 * 案例一 ：建立镜像
 
@@ -288,3 +280,13 @@ CMD ["curl","-s","http://ip.cn"]
 ```
 
  3.运行时，就会触发 “father onbuild ----886”命令
+
+
+
+### 5.参考资料[docker---Dockerfile编写] 
+
+https://www.cnblogs.com/zpcoding/p/11450686.html#_label0_0
+
+https://zhuanlan.zhihu.com/p/45625808
+
+https://zhenye-na.github.io/2019/09/29/docker-practical-guide.html 【写的很好】
