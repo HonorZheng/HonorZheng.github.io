@@ -120,6 +120,20 @@ COPY["SRC","DEST"]
 COPY /predict_sales /task01
 ```
 
+docker cp 命令用于容器与主机之间的数据拷贝
+
+- 将主机 /www/runoob 目录拷贝到容器 96f7f14e99ab 的 /www 目录下
+
+```jsx
+docker cp /www/runoob 96f7f14e99ab:/www/
+```
+
+- 将容器 96f7f14e99ab 的 /www 目录拷贝到主机的 /tmp 目录中
+
+```jsx
+docker cp 96f7f14e99ab:/www /tmp/
+```
+
 - [x] 只是拷贝
 
 **>>>对比ADD和COPY<<< **
@@ -179,6 +193,34 @@ $ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
    `ro` - Read Only, 只读
 
    在 container 中 执行 `touch container.txt` 会返回错误信息
+   
+   --------------------------------------------------------------
+   
+   ## Docker 挂载目录
+   
+   挂载目录后镜像内就可以共享宿主机里的文件
+   
+   通过 run -v 参数指定挂载目录(格式：宿主机目录:镜像内挂载目录)，如果宿主机目录不存在则创建
+   
+   Centos7 中本地挂载的目录在容器中没有执行权限，通过 --privileged=true 给容器加特权
+   
+   下面以 centos 镜像为例：
+   
+   1. 通过 Centos 镜像运行一个容器，并设置挂载目录
+   
+   
+   
+   ```kotlin
+   docker run -it -v /home/linyuan/Downloads/data:/data centos
+   ```
+   
+   1. 此时可看到宿主机上 /home/linyuan/Downloads 文件夹下多出了 /data 目录
+   
+   2. 因为通过 -it 参数，已进入容器内部，通过 ls -a 命令查看文件夹，可看见多出 /data 目录，通过 cd 命令进入文件夹下并新建文件 touch a.txt
+   
+   3. 可看见宿主机 /data 目录也会存在该文件
+   
+      --------------------------------------------------------------
 
 **WORKDIR**
 
