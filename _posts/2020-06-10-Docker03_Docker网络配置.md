@@ -31,7 +31,7 @@ sudo systemctl restart docker
 
 
 
-### 2.域名 （**Domain Name**）、主机和服务商
+## 2.域名 （**Domain Name**）、主机和服务商
 
 域名是用来标记一个网站的名字
 
@@ -111,7 +111,50 @@ HTTP,  Hypertext Transfer Protocol 超文本传输协议
 
 
 
-未完待续...
+## 3.docker四种网络模式区别
+
+1.host模式
+host表示容器共享宿主机的ip和端口号。容器中不会虚拟自己的网卡和ip，当你查看容器ip的时候，其实是宿主机的ip。
+如：创建nginx容器
+
+```dockerfile
+docker run -tid --net=host --name nginx nginx:1.13.12
+```
+
+你访问主机的http://ip:80其实就是容器的80端口，不用做端口映射了。
+
+2.Container模式(未测试)
+container是共享容器ip地址和端口
+
+```dockerfile
+docker run -tid --net=container:nginx --name mysql mysql:5.7
+```
+
+3.None模式s
+使用none模式时容器没有网卡、IP、路由等信息。需要我们自己为Docker容器添加网卡、配置IP等
+
+```
+docker run -tid --net=none --name nginx2 nginx:1.13.12
+```
+
+4.bridge模式
+bridge模式是docker默认的网络模式，这种模式容器直接可以互相通讯，但无法和宿主机通讯。
+
+注：bridge不支持自定义容器ip
+如： 
+
+```
+docker run -itd --net bridge --ip 172.18.0.10 nginx:latest /bin/bash
+```
+
+会报错：
+
+```
+docker: Error response from daemon: User specified IP address is supported on user defined networks only.
+```
+
+跨主机通信：
+直接路由方式、桥接方式（如pipework）、Overlay隧道方式（如flannel、ovs+gre）
 
 
 

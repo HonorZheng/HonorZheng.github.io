@@ -5,14 +5,18 @@ tags: Docker_Flask
 categories: ''
 
 ---
-# Docker-Nginx
+# Docker-Compose
 
-docker conpose，需要学习
+docker compose同一个服务器上开启多个微服务，并实现集群管理。
 
 ## 1. 安装docker compose
 
 ```linux
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+国内镜像
+sudo curl -L "https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
 ```
 
 将可执行权限应用于二进制文件：
@@ -55,12 +59,12 @@ Dockerfile相对于镜像，犹如docker-compose.yml相对于项目集群
 前提：我们本地需要有mysql和wordpress这两个镜像
 
 ```
-version: '3'
+version: '3'                 # docker文件版本格式
 
 services:
 
-  wordpress:
-    image: wordpress
+  wordpress:                 # docker服务器名
+    image: wordpress		# docker镜像
     ports:
       - 8080:80
     environment:
