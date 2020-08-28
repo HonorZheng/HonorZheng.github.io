@@ -1,0 +1,70 @@
+---
+title: flask+AJAX前后端交互实例
+layout: post
+tags: web开发
+categories: ''
+---
+
+## 1. 前端输入设计
+
+html页面
+
+```html
+<div class="part">重新训练模块
+    <form>
+        输入时长<input type="text" name="输入时长" id="inputTimeRange" value="4"> 秒(s) <br>
+        预测时长<input type="text" name="输入时长" id="preTimeRange" value="1" disabled="disabled"> 秒(s) <br>
+    </form>
+    <input class="button" onclick="ajaxform()" type="button" value="重新训练">
+</div>
+```
+
+js页面
+
+```javascript
+function ajaxform(){
+    var data = {
+    "rawTime":document.getElementById("inputTimeRange").value,
+    "preTime": document.getElementById("preTimeRange").value
+};
+$.ajax({
+    type: 'GET',
+    url: '/retraining',
+    async: true,
+    data: data,
+    dataType: 'json',
+    success: function(data) {
+    },
+    error: function(xhr, type) {
+    }
+});
+}
+```
+
+flask页面
+
+```python
+@app.route('/retraining', methods=['GET', 'POST'])
+def retraining():
+    rawTime = int(request.args.get('rawTime', ''))
+    preTime = int(request.args.get('preTime', ''))
+    print(rawTime, preTime)
+    seq_length = rawTime
+    timeslip = preTime
+    data_input_path = r'data/Input/'
+    data_output_path = r'data/Output/'
+    model_path = r'data/model/'
+    filename = '达坂城风速多变量缩小值.csv'
+    mode = "{}s 预测 {}s 风场级风速".format(seq_length, timeslip)
+    filepath = data_input_path + filename
+    title = os.path.splitext(os.path.split(filename)[1])[0]
+    # 训练阶段
+    print('正在训练模型{}'.format(mode))
+    data = DataGet(filepath, data_output_path, title, seq_length, timeslip)
+    data.normal()
+    data.data_split()
+    train_model = Training(data.trainX, data.trainY, num_epochs=1000, learning_rate=0.1, hidden_size=5, num_layers=1, )
+    train_model.training(title, mode)
+    return redirect(url_for('lstm'))
+```
+
