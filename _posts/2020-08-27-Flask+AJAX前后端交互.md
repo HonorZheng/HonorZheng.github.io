@@ -68,3 +68,5 @@ def retraining():
     return redirect(url_for('lstm'))
 ```
 
+## 2.表单操作，前后端交互
+
