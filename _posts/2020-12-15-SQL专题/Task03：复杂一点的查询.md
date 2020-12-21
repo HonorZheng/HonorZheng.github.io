@@ -352,6 +352,13 @@ product_name | sale_price | regist_date
 T恤衫         | 　 1000    | 2009-09-20
 菜刀          |    3000    | 2009-09-20
 ```
+```sql
+CREATE VIEW ViewPractice5_1 
+AS SELECT product_name, sale_price, regist_date 
+FROM Product 
+WHERE sale_price >= 1000 AND regist_date = '2009-09-20';
+```
+
 ## 3.2
 
 向习题一中创建的视图 ViewPractice5_1 中插入如下数据，会得到什么样的结果呢？
@@ -359,6 +366,8 @@ T恤衫         | 　 1000    | 2009-09-20
 ```sql
 INSERT INTO ViewPractice5_1 VALUES (' 刀子 ', 300, '2009-11-02');
 ```
+会出现错误，与product表的列不同
+
 ## 3.3
 
 请根据如下结果编写 SELECT 语句，其中 sale_price_all 列为全部商品的平均销售单价。
@@ -375,6 +384,12 @@ product_id | product_name | product_type | sale_price | sale_price_all
 0007       | 擦菜板        | 厨房用具       | 880       | 2097.5000000000000000
 0008       | 圆珠笔        | 办公用品       | 100       | 2097.5000000000000000
 ```
+```sql
+select product_id, product_name, product_type, sale_price,  (select avg(sale_price) from product) as sale_price_all from product;
+```
+
+
+
 ## 3.4
 
 请根据习题一中的条件编写一条 SQL 语句，创建一幅包含如下数据的视图（名称为AvgPriceByType）。
@@ -393,6 +408,18 @@ product_id | product_name | product_type | sale_price | avg_sale_price
 ```
 提示：其中的关键是 avg_sale_price 列。与习题三不同，这里需要计算出的 是各商品种类的平均销售单价。这与使用关联子查询所得到的结果相同。 也就是说，该列可以使用关联子查询进行创建。问题就是应该在什么地方使用这个关联子查询。
 # 
+
+```sql
+Create view avgpricebytype as
+select product_id, product_name, product_type,sale_price,
+(select avg(sale_price) from product P2
+where p1.product_type = p2.product_type) # 使用关联子查询进行结算
+as avg_sale_price
+from product p1;
+```
+
+
+
 # 3.3 各种各样的函数
 
 sql自带了各种各样的函数，极大提高了sql语言的便利性。
@@ -1368,6 +1395,12 @@ SELECT name,
 
 运算或者函数中含有 NULL 时，结果全都会变为NULL ？（判断题）
 
+```
+是的
+```
+
+
+
 ## 3.6
 
 对本章中使用的 product（商品）表执行如下 2 条 SELECT 语句，能够得到什么样的结果呢？
@@ -1379,12 +1412,24 @@ SELECT product_name, purchase_price
   FROM product
  WHERE purchase_price NOT IN (500, 2800, 5000);
 ```
+```
+product_name | purchase_price
+----------+-----------+------------
+  打孔器                320 
+  切菜板                790
+```
+
 ②
+
 ```sql
 SELECT product_name, purchase_price
   FROM product
  WHERE purchase_price NOT IN (500, 2800, 5000, NULL);
 ```
+```
+Empty set (0.00 sec)
+```
+
 ## 3.7
 
 按照销售单价（ sale_price）对练习 6.1 中的 product（商品）表中的商品进行如下分类。
@@ -1402,5 +1447,11 @@ low_price | mid_price | high_price
 ----------+-----------+------------
         5 |         1 |         2
 ```
-## 
+```sql
+select
+sum (case when sale_price <= 1000 then 1 else 0 end) as low_price,
+sum (case when sale_price between 1001 and 3000 then 1 else 0 end) as mid_price,
+sum (case when sale_price > 3000 then 1 else 0 end) as high_price,
+from product;
+```
 
