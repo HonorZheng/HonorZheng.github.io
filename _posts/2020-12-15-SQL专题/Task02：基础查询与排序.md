@@ -303,7 +303,7 @@ T恤衫         | 　 1000    | 500
 高压锅        |    6800    | 5000
 ```
 ```sql
-select  product_name from product where sale_price-purchase_price > 500
+select  product_name from product where sale_price-purchase_price >= 500
 select  product_name from product where not sale_price-purchase_price <= 500
 ```
 
@@ -316,7 +316,7 @@ select  product_name from product where not sale_price-purchase_price <= 500
 提示：销售单价打九折，可以通过sale_price列的值乘以0.9获得，利润可以通过该值减去purchase_price列的值获得。
 
 ```sql
-select product_name,product_name,(sale_price*0.9 - purchase_price) as "profit" from product where (sale_price*0.9 - purchase_price) <100;
+select product_name,product_name,(sale_price*0.9 - purchase_price) as "profit" from product where (sale_price*0.9 - purchase_price) <100 ;
 ```
 
 # 2.4 对表进行聚合查询
@@ -564,4 +564,10 @@ where SUM(sale_price) < SUM(purchase_price)*1.5 ;
 此前我们曾经使用SELECT语句选取出了product（商品）表中的全部记录。当时我们使用了ORDERBY子句来指定排列顺序，但现在已经无法记起当时如何指定的了。请根据下列执行结果，思考ORDERBY子句的内容。
 
 ![图片](img/ch02/ch02.09test27.png)
+
+```sql
+SELECT *
+FROM product
+ORDER BY regist_date DESC, sale_price;
+```
 

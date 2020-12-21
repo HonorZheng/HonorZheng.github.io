@@ -417,3 +417,5 @@ create table Addressbook (regist_no INT NOT NULL,
 
 编写 SQL 语句来恢复删除掉的 Addressbook 表。
 
+答案：删除后的表无法使用命令进行恢复，请使用习题1.1答案中的 CREATE TABLE 语句再次创建所需的表。
+
