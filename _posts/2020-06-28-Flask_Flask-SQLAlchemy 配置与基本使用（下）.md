@@ -1,5 +1,5 @@
 ---
-title:Flask_Flask-SQLAlchemy 配置与基本使用
+title: Flask_Flask-SQLAlchemy 配置与基本使用
 layout: post
 tags: Flask
 categories: ''
