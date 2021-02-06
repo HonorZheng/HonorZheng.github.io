@@ -1,6 +1,6 @@
 ---
 title: flask数据库flask-SQLAlchemy
-tags: 数据库开发
+tags: web开发
 categories: ''
 ---
 
