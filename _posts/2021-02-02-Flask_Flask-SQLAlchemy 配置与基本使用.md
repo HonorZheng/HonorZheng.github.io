@@ -461,7 +461,11 @@ Flask``-``SQLAlchemy提供的paginate()方法，返回值是一个Pagination类�
 
 ### 6.1、paginate
 
-`paginate(page=None, per_page=None, error_out=True, max_per_page=None)`
+```
+paginate(page=None, per_page=None, error_out=True, max_per_page=None)
+```
+
+
 这边说明一下这个方法对应的参数：
 
 - page
