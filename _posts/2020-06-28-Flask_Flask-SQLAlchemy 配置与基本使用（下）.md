@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
 SQLAlchemy 把一个引擎的源表示为一个连同设定引擎选项的可选字符串参数的 URI。URI 的形式是:
 
-```
+```mysql
 dialect+driver://username:password@host:port/database
 ```
 
