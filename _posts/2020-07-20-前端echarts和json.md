@@ -5,7 +5,7 @@ tags: 前端
 categories: ''
 ---
 
-# JSON格式文件解析
+# 一、JSON格式文件解析
 
 1.JSON是什么
 
@@ -69,7 +69,7 @@ JSON解析和生成
 
 
 
-# echars实现动态图表
+# 二、echars实现动态图表
 
 https://www.bilibili.com/video/BV17t4y1175V
 
@@ -88,11 +88,242 @@ https://www.bilibili.com/video/BV17t4y1175V
 * 图表混搭【图表中搭配图表】
 * 特效
 
-## 1.基础教程
+### 2.1介绍
 
-1.布局设置 ，使用flexible.css布局
+底层采用zrender，开源免费，功能丰富、社区活跃的JavaScript库。
+
+数据格式
+
+1. 支持key-value
+2. 二维表
+3. TypedArray
+
+流数据的支持
+
+1. 流数据的动态渲染
+2. 增量渲染技术
+
+### 2.2快速入门
+
+1. 引入echarts.js文件
+
+   ```html
+   <script src="echarts.min.js"></script>
+   ```
+
+   
+
+2. 准备呈现图表的盒子
+
+   ```html
+   <div style="width:600px;height:600px"></div>
+   ```
+
+   
+
+3. 初始化echarts实例对象
+
+   ```html
+   <script>
+   var mecharts = echarts.init(document.querySelector('div'))
+   </script>
+   ```
+
+4. 准备配置项
+
+   ```javascript
+   option = {
+       xAxis: {
+           type: 'category',
+           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+       },
+       yAxis: {
+           type: 'value'
+       },
+       series: [{
+           data: [150, 230, 224, 218, 135, 147, 260],
+           type: 'line'
+       }]
+   };
+   ```
+
+5. 将配置项设置给你实例对象
+
+   ```javascript
+   mecharts.setOption(option)
+   ```
+
+### 2.3配置项
+
+```html
+<script>
+option = {
+    xAxis: {
+        type: 'category', //类目轴
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value' //数值轴
+    },
+    series: [{			//系列列表
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line'  
+    }]
+};
+</script>
+
+```
+
+配置项较多，使用时直接查阅官方文档 https://echarts.apache.org/zh/option.html#title
+
+### 2.4echarts常用图表
+
+7大图表
+
+柱状图、折线图、散点图、饼图、地图、雷达图、仪表盘图
+
+#### 1.常见效果
+
+标记：最大值、最小值、平均值
+
+x,y轴切换，只需要改变xAxis,yAxis
+
+markPoint，markLine
+
+label
 
 
 
 
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    option = {
+        title: {
+            text: "Main Title",
+            subtext: "Sub Title",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 30
+            },
+            subtextStyle: {
+                fontSize: 20
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'bar',
+            label: {
+                show: true, //显示柱状图数值
+                color: 'white',
+                rotate:30,
+            },
+            markLine: {
+                data: [{
+                    0: {},
+                    type: "average"
+                }]//设置平均值线
+            },
+            markPoint: {
+                data: [{
+                    type: "max",
+                    name: '最大值'
+                },//设置最大值
+                {
+                    type: "min",
+                    name: '最小值'
+                } //设置最小值
+
+                ],
+                symbol: "pin"
+            },
+
+            barWidth: '30%', //设置柱的宽度
+        },
+        
+    ],
+    };
+    myechart.setOption(option)
+</script>
+```
+#### 2.通用配置title
+
+1. 文字样式 textStyle
+2. 标题边框 borderWidth，borderColor，borderRadius
+3. 标题位置left ，top，right，bottom
+
+#### 3.通用配置tooltip
+
+提示框组件，用于配置鼠标滑过或者点击图表时候的显示
+
+1. 触发类型：trigger
+
+   ```javascript
+   trigger:"item"
+   trigger:"axis"
+   ```
+
+   item显示name和数值；axis指只要移入柱子的轴里面就触发name和数值。
+
+2. 触发时机：triggerOn
+
+   mouserover，click
+
+   ```javascript
+   triggerOn:"mouseover"
+   triggerOn:"click"
+   ```
+
+3. 格式化：formatter
+
+   决定鼠标触发后显示的内容，支持字符串和函数。
+
+   格式化字符串：
+
+   ```javascript
+   formatter:"{b}的成绩是{c}"
+   ```
+
+   函数：
+
+   ```javascript
+   formatter：function(arg){
+   return a[0].name+'的分数是'+arg[0].data}
+   ```
+
+   
+
+#### 4.通用配置toolbox
+
+导出图片、数据视图、动态类型切换、数据区域缩放、重置
+
+```javascript
+toolbox{
+feature:{
+saveAsImage:{},//导出图片
+dataView:{},//数据视图
+restore:{},//重置视图
+dataZoom:{},//区域缩放
+magicType:{
+    type:['bar','line']
+} // 柱状图折线图切换，即动态图表切换
+}
+}
+```
+
+#### 5.通用配置legend
+
+legend图例，用于对系列进行筛选，结合series使用，元素来自series中的name名字
+
+```
+legend:{['语文'，数学]}
+```
 
