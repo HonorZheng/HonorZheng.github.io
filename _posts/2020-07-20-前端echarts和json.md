@@ -327,3 +327,110 @@ legend图例，用于对系列进行筛选，结合series使用，元素来自se
 legend:{['语文'，数学]}
 ```
 
+### 2.5折线图
+
+#### 1.常见效果
+
+1. 最大值最小值平均值 markPoint，markLine
+
+2. 标注区间markArea
+
+3. 平滑 smooth 
+
+4. 线性lineStyle -> 颜色：color,线型【实线，虚线】type：dash/solid
+
+5. 填充风格【面积填充】 areaStyle，对折线以下的面积进行填充
+
+6. 设置x轴的起点， boundaryGap:false,从第一个元素开始，与坐标轴没有间隔
+
+7. 缩放，控制y轴是否从0开始；scale:true可以脱离0值
+
+8. 折线堆叠效果stack，stack后面的字符串可以是任意字符，只要相同，就可以叠加；
+
+   tip：使用areaStyle效果更好
+
+```html
+<script>
+      var myechart = echarts.init(document.getElementById("myechart"));
+    option = {
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        boundaryGap:false
+    },
+    yAxis: {
+        type: 'value'，
+        scale:true
+    },
+    },
+    series: [{
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line',
+        markPoint:{
+            data:[{
+                type: "max"
+            },
+            {
+                type: "min"
+            }]
+        },
+        markLine:{
+            data:[{
+                type:"average",
+
+            }]
+        },
+        markArea:{
+            data:[
+            [{xAxis:'Mon'},{xAxis:'Wed'}],
+            [{xAxis:'Fri'},{xAxis:'Sat'}]   
+            ]},
+        smooth:true,
+        lineStyle:{ color:"green",
+                     type:"dash"},
+        areaStyle:{ color:"blue"}
+    }]
+};
+    myechart.setOption(option)
+</script>
+```
+
+堆叠效果
+
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    option = {
+        xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '邮件营销',
+            type: 'line',
+            stack: '总量',
+            data: [120, 132, 101, 134, 90, 230, 210],
+            areaStyle:{}
+        },
+        {
+            name: '联盟广告',
+            type: 'line',
+            stack: '总量',
+            data: [220, 182, 191, 234, 290, 330, 310],
+            areaStyle:{}
+        },
+       
+    ]
+};
+        myechart.setOption(option)
+</script>
+```
+
+#### 2.折线图特点
+
+折线图通常用来表示时域区域内的展示
