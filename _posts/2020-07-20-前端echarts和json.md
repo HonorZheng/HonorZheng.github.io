@@ -434,3 +434,202 @@ legend:{['语文'，数学]}
 #### 2.折线图特点
 
 折线图通常用来表示时域区域内的展示
+
+### 2.6散点图
+
+#### 1.常见效果
+
+1. x轴和y周的数据是一个二维数组；
+2. xAxis和yAxis中的type设置为value
+3. **气泡图效果**：散点大小不同 symbolSize；散点颜色不同 itemStyle.color
+4. **涟漪动画效果**： type：effectScatter  【即将scatter改成effectScatter】
+5. 可以通过rippleEffect中scale来控制；效果可以使用showEffectOn:render或者emphasis来确定
+
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    var data = [
+            [118, 85],
+            [145, 51],
+            [144, 46],
+            [147, 78],
+            [155, 69],
+            [121, 83],
+            [125, 60],
+            [113, 56],
+            [163, 62],
+            [111, 84],
+            [139, 58],
+            [159, 81],
+            [159, 62],
+            [181, 83],
+            [182, 65],
+            [153, 48],
+            [182, 51],
+            [144, 53],
+            [135, 42],
+            [127, 74],
+            [119, 85],
+            [161, 64],
+            [133, 66],
+            [141, 88],
+            [180, 54],
+            [181, 75],
+            [127, 43],
+            [128, 78],
+            [158, 47],
+            [153, 79],
+            [172, 62],
+            [115, 42],
+            [150, 67],
+            [180, 75],
+            [171, 46],
+            [132, 63],
+            [116, 45],
+            [145, 69],
+            [126, 57],
+            [188, 46],
+            [176, 88],
+            [112, 52],
+            [112, 90],
+            [188, 77],
+            [114, 80],
+            [157, 82],
+            [146, 73],
+            [167, 46],
+            [122, 82]
+        ],
+        option = {
+            xAxis: {
+                type: 'value',
+                scale: true
+            },
+            yAxis: {
+                type: 'value',
+                scale: true
+            },
+            series: [{
+                name: '1990',
+                data: data,
+                type: 'scatter',
+                type:'effectScatter',// 开启涟漪动画
+                rippleEffect:{scale:3},
+                showEffectOn:'emphasis',//renders是默认效果
+                
+                scale: true,
+                symbolSize: function (arg) {
+                    // console.log(arg)
+                    let height = arg[0] / 100
+                    let weight = arg[1]
+                    let bmi = weight / (height * height)
+                    if (bmi > 28) {
+                        return 20
+                    }
+                    return 10
+                },
+                itemStyle: { //颜色更改也可以使用函数
+                    color: function (arg) {
+                        console.log(arg)
+                        let height = arg.data[0] / 100
+                        let weight = arg.data[1]
+                        let bmi = weight / (height * height)
+                        if (bmi > 28) {
+                            return 'red'
+                        }
+                        return 'green'
+                    },
+                }
+            }]
+        }
+
+    myechart.setOption(option)
+</script>
+```
+
+#### 2.散点图特点
+
+1. 散点图可以帮助我们推断出不同维度数据之间的相关性
+2. 散点图经常结合地图进行标注
+
+### 2.7小结1--直角坐标系常用配置
+
+直角坐标系图表：直方图、折线图、散点图
+
+#### 1. 配置1 grid
+
+grid是用来控制直角坐标系的布局和大小
+
+x轴和y轴就是在grid的基础上进行绘制的
+
+1. 显示grid --- show
+2. grid的表框--- borderWidth、borderColor
+3. grid的位置和大小 --- left、top、right、bottom、width、height
+
+```javascript
+    option = {
+        grid:{
+            show:true, //上下左右有边框
+            borderWidth:10,//边框宽度
+            borderColor:'red',//边框颜色
+            left:200,//边框发生了移动
+        },
+        ...
+        }
+```
+
+#### 2. 配置2 坐标轴axis
+
+坐标轴分为x轴和y轴
+
+一个grid中最多有两种位置的x轴和y轴
+
+- 坐标轴类型type
+
+  value：数值轴，自动会从目标数据中读取数据
+
+  category：**类目轴，该类型必须通过data设置类目数据**
+
+- 显示位置position
+
+  xAxis:可取值为top或者bottom
+
+  yAxis：可取值为left或者right
+
+#### 3. 配置3 区域缩放dataZoom
+
+dataZoom用于区域缩放，对数据范围过滤，x轴y轴都可以使用
+
+dataZoom是一个数组，意味着可以配置多个区域缩放器
+
+- 类型 type
+
+  slider：滑块
+
+  inside：内置，依靠鼠标滚轮或者双指缩放
+
+- 指明产生作用的轴
+
+  xAxisIndex，yAxisIndex，一般写0即可
+
+  ```javascript
+      option = {
+          grid:{
+              show:true, //上下左右有边框
+              borderWidth:10,//边框宽度
+              borderColor:'red',//边框颜色
+              left:200,//边框发生了移动
+          },
+          dataZoom:[{
+              type:'slider',//滑块
+              xAxisIndex:0, //0代表第0个x轴，如果两个的话，可以指定1
+          },
+          {
+              type:'slider',//
+              yAxisIndex:0,//0代表第0个y轴，如果两个的话，可以指定1
+          },
+      ],
+      ...
+      }
+  ```
+
+  
