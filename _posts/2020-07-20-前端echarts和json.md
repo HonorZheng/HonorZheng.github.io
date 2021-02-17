@@ -632,4 +632,143 @@ dataZoom是一个数组，意味着可以配置多个区域缩放器
       }
   ```
 
+
+
+### 2.8饼图
+
+#### 1.通用设置
+
+数据结构
+
+```javascript
+var piedata= [
+                {value: 1048, name: '搜索引擎'},
+                {value: 735, name: '直接访问'},
+                {value: 580, name: '邮件营销'},
+                {value: 484, name: '联盟广告'},
+                {value: 300, name: '视频广告'}
+            ],
+```
+
+```javascript
+    option = {
+        series:[{
+            type:"pie",
+            data:piedata,
+        }],
+    };
+```
+
+#### 2.常见效果
+
+- 显示数值
+
+  label.formatter
+
+- 圆环
+
+  设置两个圆环半径 radius:['50%','70%]
+
+- 南丁格尔图
+
+  roseType:'radius'
+
+- 选中效果
+
+  selectedMode:"single" 
+
+  selectedOffset:30
+
+  ```html
+  <script>
+      var myechart = echarts.init(document.getElementById("myechart"));
+      var piedata =[
+                  {value: 1048, name: '搜索引擎'},
+                  {value: 735, name: '直接访问'},
+                  {value: 580, name: '邮件营销'},
+                  {value: 484, name: '联盟广告'},
+                  {value: 300, name: '视频广告'}
+              ],//数据为键值对形式
+      option = {
+          series:[{
+              type:"pie",
+              data:piedata,
+              label:{
+                  formatter:function(arg){
+                  console.log(arg)
+                  return arg.name+'平台'+arg.value + '元\n'+arg.percent+'%'
+              } // 通过label中的formatter进行标签格的更改
+              },
+              // radius:50,
+              // radius:["50%",'70%'],// 半径参考的是1/2*min[height,width] ,此处生成环装饼图，
+              roseType:'radius', // 设置成南丁格尔图，即饼图的半径不一样，此处半径取决于数值大小
+              selectedMode:"single" ,//选中，点击出现偏离，如果设置为multiple，可以进行多个的操作
+              selectedOffset:30, // 设置点击偏离的距离
+          }],
+      };
+      myechart.setOption(option)
+  </script>
+  ```
+
+  ### 
+
   
+
+#### 3.饼图特点
+
+​	饼图可以帮助用户很好的了解各个分类的占比情况
+
+### 2.9地图
+
+#### 1.地图使用方式：
+
+1. 百度地图api
+
+   需要申请一个百度地图ak
+
+2. 矢量地图
+
+   需要提前准备矢量地图数据
+
+#### 2.步骤
+
+1. echarts基本结构
+
+2. 准备中国的矢量地图json文件，放到json/map目录中
+
+3. 使用ajax获取china.json
+
+   $.get('json/map/china.json',function(china.json){})
+
+4. 在回调函数中往echarts全局对象注册地图的json数据
+
+   echarts.registerMap('**chinaMap**'，chinajson)
+
+5. 在geo下配置
+
+   type:"map",
+
+   map:"**chinaMap**"
+
+   ```html
+   <script src="../static/js/echarts.min.js"></script>
+   <script src="../static/js/jquery-3.5.1.min.js"></script>
+   <script>
+       var myechart = echarts.init(document.getElementById("myechart"));
+       $.get('../static/geojson/guangdong.json',function(ret){
+           // console.log(ret) //ret为各个地区的
+           echarts.registerMap('guangdong',ret)
+           var option={
+               geo:{
+                   type:'map',
+                   map:"guangdong" //需要与registerMap第一个参数保持一致
+               }
+           }
+           myechart.setOption(option)
+       })
+       
+   </script>
+   ```
+
+   
+
