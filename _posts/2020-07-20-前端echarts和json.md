@@ -772,3 +772,49 @@ var piedata= [
 
    
 
+#### 3.常用配置
+
+1. 缩放拖动 roam
+2. 名称显示 label：{show：true}
+3. 初始显示放大 zoom
+4. 地图中心点设置 center=[30.11,121.02]
+
+```html
+<script src="../static/js/echarts.min.js"></script>
+<script src="../static/js/jquery-3.5.1.min.js"></script>
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    $.get('../static/geojson/guangdong.json',function(ret){
+        console.log(ret) //ret为各个地区的
+        echarts.registerMap('guangdong',ret)
+        var option={
+            geo:{
+                type:'map',
+                map:"guangdong", //需要与registerMap第一个参数保持一致
+                zoom:3,
+                label:{
+                    show:true,
+
+                },
+                center:[113.382391, 22.521113],// 中山市位于地图的中央
+
+            }
+        }
+        myechart.setOption(option)
+    })
+    
+</script>
+```
+
+4.常见效果
+
+- 不同城市颜色不同
+
+  1.显示基本的中国地图
+
+  2.城市的空气质量数据设置给series
+
+  3.将series下的数据和geo关联起来
+
+  4.结合visualMap配合使用
+
