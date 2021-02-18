@@ -806,7 +806,7 @@ var piedata= [
 </script>
 ```
 
-4.常见效果
+#### 4.常见效果
 
 - 不同城市颜色不同
 
@@ -818,3 +818,177 @@ var piedata= [
 
   4.结合visualMap配合使用
 
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    var airdata =[
+    {name: '广州市', value: 500},
+    {name: '韶关市', value: 360},
+    {name: '深圳市', value: 200},
+    {name: '清远市', value: 532},
+    {name: ' 东莞市', value: 454},
+    {name: '珠海市', value: 223},
+    {name: '汕头市', value: 231},
+    {name: '江门市', value: 323},
+    {name: '佛山市', value: 212},
+    {name: '湛江市', value: 2321},
+    {name: '茂名市', value: 2132},
+    {name: '肇庆市', value: 231},
+    {name: '惠州市', value: 231},
+    {name: '梅州市', value: 321},
+    {name: '汕尾市', value: 553},
+    {name: '河源市', value: 554},
+    {name: '阳江市', value: 321},
+    {name: '中山市', value: 535},
+    {name: '潮州市', value: 365},
+    {name: '揭阳市', value: 456},
+    {name: '云浮市', value: 453}
+]
+    $.get('../static/geojson/guangdong.json',function(ret){
+        console.log(ret) //ret为各个地区的
+        var a=[]
+        ret.features.forEach(function(element) {
+            console.log(element.properties.name);
+            a.push(element.properties.name)
+            });
+            console.log(a);
+        // console.log(ret.features[0].properties.name) //ret为各个地区的
+        echarts.registerMap('guangdong',ret)
+        var option={
+            grid:{
+                left:'10%',
+                top:5000,
+                borderColor:'red',
+            },
+            series:{data:airdata,
+            geoIndex:0 ,// 将空气质量数据与第0个geo进行匹配
+            type:"map",        
+            },
+
+            geo:{
+                type:'map',
+                map:"guangdong", //需要与registerMap第一个参数保持一致
+                zoom:1,
+                label:{
+                    show:true,
+
+                },
+
+                center:[113.382391, 22.521113],// 中山市位于地图的中央
+            },
+            visualMap:{
+                min:0,
+                max:3000,
+                inRange:{
+                    color:['white','red'], //控制渐变色
+                },
+                calculable:true, //与max，min配合出现滑块效果
+
+            },
+        }
+        myechart.setOption(option)
+    })
+</script>
+```
+
+- 地图与散点图结合
+
+  1. 给series下增加新的对象
+
+  2. 准备好散点数据，设置给新对象的data
+
+  3. 配置新对象的type
+
+     type:effectScatter
+
+  4. 让散点图使用地图坐标系统
+
+     coordinateSystem：“geo”
+
+  5. 让涟漪的效果更加明显
+
+     reppleEffect：{ scale:10}
+
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    var scatterData = [
+        {value:[113.382391, 22.521113]}
+        ];//呈现涟漪动画的坐标点
+    var airdata =[
+    {name: '广州市', value: 500},
+    {name: '韶关市', value: 360},
+    {name: '深圳市', value: 200},
+    {name: '清远市', value: 532},
+    {name: ' 东莞市', value: 454},
+    {name: '珠海市', value: 223},
+    {name: '汕头市', value: 231},
+    {name: '江门市', value: 323},
+    {name: '佛山市', value: 212},
+    {name: '湛江市', value: 2321},
+    {name: '茂名市', value: 2132},
+    {name: '肇庆市', value: 231},
+    {name: '惠州市', value: 231},
+    {name: '梅州市', value: 321},
+    {name: '汕尾市', value: 553},
+    {name: '河源市', value: 554},
+    {name: '阳江市', value: 321},
+    {name: '中山市', value: 535},
+    {name: '潮州市', value: 365},
+    {name: '揭阳市', value: 456},
+    {name: '云浮市', value: 453}
+]
+    $.get('../static/geojson/guangdong.json',function(ret){
+        console.log(ret) //ret为各个地区的
+        var a=[]
+        ret.features.forEach(function(element) {
+            console.log(element.properties.name);
+            a.push(element.properties.name)
+            });
+            console.log(a);
+        echarts.registerMap('guangdong',ret)
+        var option={
+            geo:{
+                type:'map',
+                map:"guangdong", //需要与registerMap第一个参数保持一致
+                zoom:1.2,
+                label:{
+                    show:true,
+
+                },
+
+                center:[113.382391, 22.521113],// 中山市位于地图的中央
+            },
+            series:[{
+                data:airdata,
+                geoIndex:0 ,// 将空气质量数据与第0个geo进行匹配
+                type:"map",        
+            },
+            {
+                data:scatterData,//配置散点数据
+                type:'effectScatter', //配置散点类型
+                coordinateSystem:"geo",//指明散点使用的坐标系统，为geo
+                rippleEffect:{
+                    scale:10
+                }
+            }],
+
+
+            visualMap:{
+                min:0,
+                max:3000,
+                inRange:{
+                    color:['white','red'], //控制渐变色
+                },
+                calculable:true, //与max，min配合出现滑块效果
+            },
+        }
+        myechart.setOption(option)
+    })
+    
+</script>
+```
+
+#### 5.地图特点
+
+地图主要可以帮助我们从宏观上快速看出不同地理位置上的数据差异
