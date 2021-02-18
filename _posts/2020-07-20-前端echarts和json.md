@@ -992,3 +992,215 @@ var piedata= [
 #### 5.地图特点
 
 地图主要可以帮助我们从宏观上快速看出不同地理位置上的数据差异
+
+### 2.10雷达图
+
+#### 1.实现步骤
+
+- 定义各个维度的最大值
+- 定义图表的类型
+
+#### 2.雷达图特点
+
+雷达图可以用来分析多个维度的数据与标准情况数据的对比情况
+
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    option = {
+    title: {
+        text: '基础雷达图'
+    },
+    tooltip: {},
+    label: {show:true},   //显示数值
+    legend: {
+        data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
+    },
+    radar: {
+        // shape: 'circle',
+        name: {
+            textStyle: {
+                color: '#fff',
+                backgroundColor: '#999',
+                borderRadius: 3,
+                padding: [3, 5]
+            }
+        },
+        indicator: [
+            { name: '销售（sales）', max: 6500},   //配置各维度最大值
+            { name: '管理（Administration）', max: 16000},
+            { name: '信息技术（Information Techology）', max: 30000},
+            { name: '客服（Customer Support）', max: 38000},
+            { name: '研发（Development）', max: 52000},
+            { name: '市场（Marketing）', max: 25000}
+        ],
+        shape:"circle" //雷达形状为圆形，默认是polygon
+
+
+    }, //添加显示信息
+    series: [{
+        name: '预算 vs 开销（Budget vs spending）',
+        type: 'radar',
+        // areaStyle: {normal: {}}, //形成阴影面积区域
+        data: [
+            {
+                value: [4300, 10000, 28000, 35000, 50000, 19000],
+                name: '预算分配（Allocated Budget）'
+            },
+            {
+                value: [5000, 14000, 28000, 31000, 42000, 21000],
+                name: '实际开销（Actual Spending）'
+            }
+        ]
+    }]
+};
+    myechart.setOption(option)
+</script>
+
+```
+
+### 2.11仪表盘
+
+```html
+<script>
+    // 1.echarts基本结构
+    // 2.准备数据，配置series下的data
+    // 3.将type设置为gauge
+    var myechart = echarts.init(document.getElementById("myechart"));
+    option = {
+        series: [
+            {
+                type: 'gauge',
+                data: [{            //配置双指针，配置data下多个对象
+                    value: 75,
+                    itemStyle: {
+                        color:"pink"
+                    }
+                }, {
+                    value: 50,
+                    itemStyle: {
+                        color: "black"
+                    }
+                }
+                ],
+                min: 20 //min和max控制数值范围
+            },
+        ]
+    };
+    myechart.setOption(option)
+</script>
+```
+
+### 2.12七个基本图表小结
+
+#### 1.各个图表的英文单词
+
+bar、line、scatter、pie、map、radar、gauge
+
+#### 2.上手基本步骤
+
+- 引入
+- 准备
+- 设置
+
+#### 3.常用图表差异
+
+- options的差异
+- 7个常用图表的配置
+- API文档查看
+
+## 三、echarts主题
+
+#### 1.内置主题
+
+- echars中默认内置两套主题：light、dark
+- 在初始化对象方法init中可以指明
+
+```javascript
+var myechart = echarts.init(document.getElementById("myechart"),'light');
+var myechart = echarts.init(document.getElementById("myechart"),'dark');
+```
+
+#### 2.自定义主题
+
+1.在echarts官网中，设置主题，保存js文件，直接引用
+
+2.初始化对象的时候，直接将主题改为保存文件的名字。这个主题名字取决于该js文件中，有个**echarts.registerTheme('itcast'，)**中的第一个参数。
+
+```javascript
+var myechart = echarts.init(document.getElementById("myechart"),'itcast');
+```
+
+#### 3.调色盘
+
+它是一组颜色，图形、系列会自动从其中选择颜色
+
+1. 主题调色盘
+
+2. 全局调色盘
+
+   ```javascript
+   option={
+   color:['red','green','blue']
+   }
+   ```
+
+   
+
+3. 局部调色盘
+
+   ```javascript
+   series:[{
+   type:"bar",
+   color:["red","green","blue"]
+   }]
+   ```
+
+   调色盘遵循就近原则：局部>全局>主题
+
+#### 4.颜色渐变
+
+线性渐变
+
+```javascript
+series:{
+data:...
+itemStyle:{
+color：{
+type:'liner',
+x:0,
+y:0,
+x2:0,
+y2:1,		//从[0，0]向[0，1] 方向
+colorStops:[
+{offsete:0,color:'red'  // 在0出为红色
+},
+{offsete:0,color:'blue' // 在100%处为蓝色
+}
+]}
+}
+
+```
+
+- 径向渐变
+
+  ```javascript
+  itemStyle:{
+  color：{
+  type:'radial',
+  x:0.5,
+  y:0.5,
+  r:0.5,		//从[0，0]向[0，1] 方向
+  colorStops:[
+  {offsete:0,color:'red'  // 在0出为红色
+  },
+  {offsete:0,color:'blue' // 在100%处为蓝色
+  }
+  ],
+  global:false //缺省为false
+  }
+  }
+  ```
+
+  
+
