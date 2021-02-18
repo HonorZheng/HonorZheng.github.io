@@ -1109,7 +1109,7 @@ bar、line、scatter、pie、map、radar、gauge
 - 7个常用图表的配置
 - API文档查看
 
-## 三、echarts主题
+## 三、echarts显示配置
 
 #### 1.内置主题
 
@@ -1202,5 +1202,50 @@ colorStops:[
   }
   ```
 
-  
+#### 5.样式
 
+- 直接样式
+
+1. itemStyle 控制区域块的颜色
+2. textStyle 控制文字的样式
+3. lineStyle 控制线型的样式
+4. areaStyle 控制区域的样式
+5. label 控制标签的样式
+
+- 高亮样式
+
+  emphasis中包裹itemStyle、textStyle、lineStyle、areaStyle、label
+
+#### 6.自适应
+
+当浏览器的大小发生变化时，图表也屏幕适配
+
+1.监听窗口的大小发生变化事件
+
+2.在事件处理函数中调用echarts实例对象resize方法
+
+```javascript
+window.onresize = myechart.resize
+```
+
+或者
+
+```
+window.onresize=function(){
+myecharts.resize()
+}
+```
+
+## 四、动画效果
+
+#### 1. 加载动画
+
+数据加载过程中的动画效果
+
+- 显示加载动画
+
+  myecharts.showLoading()
+
+- 隐藏加载动画
+
+  myecharts.hideLoading()
