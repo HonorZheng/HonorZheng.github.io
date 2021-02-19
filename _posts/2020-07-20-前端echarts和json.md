@@ -1232,7 +1232,7 @@ window.onresize = myechart.resize
 
 ```
 window.onresize=function(){
-myecharts.resize()
+	myecharts.resize()
 }
 ```
 
@@ -1252,3 +1252,224 @@ myecharts.resize()
 
 #### 2.增量动画
 
+setOption可以设置多次
+
+设置新的option时候，只需要考虑变化时候的部分就可以了，新旧option互相整合，而非覆盖。
+
+```html
+<script>
+    var myechart = echarts.init(document.getElementById("myechart"));
+    option = {
+        title: {
+            text: "Main Title",
+            subtext: "Sub Title",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 30
+            },
+            subtextStyle: {
+                fontSize: 20
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        legend:{
+            data:['aaaa'],
+            right:'100',
+        },
+        series: [{
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'bar',
+            name:'aaaa',
+            label: {
+                show: true, //显示柱状图数值
+                color: 'white',
+                rotate:30,
+            },
+            markLine: {
+                data: [{
+                    0: {},
+                    type: "average"
+                }]//设置平均值线
+            },
+            markPoint: {
+                data: [{
+                    type: "max",
+                    name: '最大值'
+                },//设置最大值
+                {
+                    type: "min",
+                    name: '最小值'
+                } //设置最小值
+
+                ],
+                symbol: "pin"
+            },
+
+            barWidth: '30%', //设置柱的宽度
+        },
+        
+    ],
+    };
+    var btnmodify = document.querySelector('#modify')
+    btnmodify.onclick = function(){
+        var datanew = [220, 150, 333, 555, 230, 556, 562],
+        option = {
+        series: [{
+            data: datanew,
+        },
+        
+    ],
+    };
+    myechart.setOption(option)
+    }
+    myechart.setOption(option)
+    window.onresize = myechart.resize
+</script>
+```
+
+#### 3.动画配置
+
+- 开启动画
+
+  ```
+  animation:true
+  ```
+
+- 动画时长
+
+  ```
+  animationDuration：7000 //毫秒
+  ```
+
+  亦可以写成函数形式
+
+  ```javascript
+  animationDuration：function(arg){
+      console.log(arg)
+  	return 2000 *arg//此种方式可以给多个部件设置不同的动画效果
+  }
+  ```
+
+- 缓动动画
+
+  ```javascript
+  animationEasing:"bounceOut" ,//设置不同的动画效果
+  ```
+
+- 动画阈值
+
+  ```
+  animationThreshold：8
+  ```
+
+  单种形式的元素数量大于这个阈值时，会关闭动画
+
+## 五、全局echarts
+
+- 全局echarts对象
+
+  全局echarts对象是引入echarts.js文件之后就可以直接使用的
+
+  - init方法
+
+    初始化实例化对象、使用主题
+
+  - registerTheme方法
+
+    注册主题
+
+  - registerMap
+
+    注册地图数据
+
+    geo组件使用地图数据
+
+    ```html
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/jquery-3.5.1.min.js"></script>
+    <script>
+        var myechart = echarts.init(document.getElementById("myechart"));
+        $.get('../static/geojson/guangdong.json',function(ret){
+            // console.log(ret) //ret为各个地区的
+            echarts.registerMap('guangdong',ret)
+            var option={
+                geo:{
+                    type:'map',
+                    map:"guangdong" //需要与registerMap第一个参数保持一致
+                }
+            }
+            myechart.setOption(option)
+        })
+        
+    </script>
+    ```
+
+  - connect方法
+
+    一个界面有多个独立的图表
+
+    每个图表对应一个echarts实例对象
+
+    connect可以实现多图关联，传入联动目标为echarts实例对象，支持数组。
+
+    【联动之后，下载图片可以拼接】
+
+- echartsInstance对象
+
+  echartsInstance对象是通过echarts.init方法调用之后得到的
+
+  1.on/off方法  绑定或者解绑事件处理函数
+
+  2.鼠标事件
+
+  常见事件：”click“，”dblclick“，”mousedown”，“mouseover”，“mouseup”等
+
+  3.echarts事件
+
+  legendselectchanged，legendselected
+
+  4.dispatchAction方法
+
+  触发某些行为
+
+  使用代码模拟用户的行为
+
+  ```
+  mcharts.dispathAction({
+  
+  type:'hightlight, //事件类型
+  
+  seriesIndex:0,//图表索引
+  
+  dataIndex:1 //图标中哪一项高亮
+  
+  })
+  ```
+
+  5.clear方法
+
+  ```javascript
+   $('#btn').click(function(){
+  
+    		mycharts.clear()
+  
+    })
+  
+  
+  
+  ```
+
+  6.dispose方法
+
+  销毁实例
+
+  销毁后实例无法再被使用
+
+六、实战 电商平台
