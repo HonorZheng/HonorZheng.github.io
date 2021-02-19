@@ -73,7 +73,7 @@ engine = create_engine("mysql://user:password@hostname/dbname?charset=uft8")
 
 这行代码初始化创建了Engine，Engine内部维护了一个Pool（连接池）和Dialect（方言），方言来识别具体连接数据库种类。
 
-![image-20200919134903113](C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200919134903113.png)
+![image-20200919134903113](images\image-20200919134903113.png)
 
 创建好了Engine的同时，Pool和Dialect也已经创建好了，但是此时并没有真正与数据库连接，等到执行具体的语句.connect()等时才会连接到数据库。
 

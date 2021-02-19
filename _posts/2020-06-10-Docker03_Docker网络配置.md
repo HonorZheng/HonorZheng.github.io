@@ -55,7 +55,7 @@ www.baidu.com
 
 
 
-<img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200629162246567.png" alt="image-20200629162246567" style="zoom:50%;" />
+<img src="images\image-20200629162246567.png" alt="image-20200629162246567" style="zoom:50%;" />
 
 2.IP协议 【Internet Protocol】
 

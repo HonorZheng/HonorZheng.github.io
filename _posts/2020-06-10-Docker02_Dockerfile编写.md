@@ -34,7 +34,7 @@ https://mp.weixin.qq.com/s/5fMSpPRq0zqQnzliwAopaQ
 
    #### dockerfile面向开发，docker镜像成为交付标准，docker容器涉及部署和运维
 
-   <img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200619141630235.png" alt="image-20200619141630235" style="zoom: 50%;" />
+   <img src="images\image-20200619141630235.png" alt="image-20200619141630235" style="zoom: 50%;" />
 
 ### 3.核心Dockerfile指令
 

@@ -46,7 +46,7 @@ Docker Compose实际就是一个yml批处理文件，用来管理多个容器
 
 Dockerfile相对于镜像，犹如docker-compose.yml相对于项目集群
 
-<img src="C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20200711084748151.png" alt="image-20200711084748151" style="zoom: 67%;" />
+<img src="images\image-20200711084748151.png" alt="image-20200711084748151" style="zoom: 67%;" />
 
 1. yml文件默认的名字为：docker-compose.yml
 2. yml包含三大概念：Services、Networks、Volumes

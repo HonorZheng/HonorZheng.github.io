@@ -15,7 +15,7 @@ Containers，通过**. container**进行布局。**.row** 控制行，**.col** �
 
 .col-* 其中的*为所占比例；总大小规定为12，.col-4代表占 4/12。
 
-![image-20201026150405376](C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20201026150405376.png)
+![image-20201026150405376](images\image-20201026150405376.png)
 
 ```javascript
 <div class="container">
@@ -72,7 +72,7 @@ twelve column system, five default responsive tiers, Sass variables and mixins, 
 
 row 代表行，row-cols-2代表每行两列；效果如下：
 
-![image-20201026161013823](C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20201026161013823.png)
+![image-20201026161013823](images\image-20201026161013823.png)
 
 ------
 
@@ -93,7 +93,7 @@ row 代表行，row-cols-2代表每行两列；效果如下：
    </div>
    ```
 
-   ![](C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20201027101025412.png)
+   ![](images\image-20201027101025412.png)
 
 5. 列排序：左右推拉
 
@@ -110,7 +110,7 @@ row 代表行，row-cols-2代表每行两列；效果如下：
 
 6. 响应式工具【大屏显示，小屏显示等】
 
-   ![image-20201027104112000](C:\Users\zheng\AppData\Roaming\Typora\typora-user-images\image-20201027104112000.png)
+   ![image-20201027104112000](images\image-20201027104112000.png)
 
    在某个屏幕下隐藏
 
