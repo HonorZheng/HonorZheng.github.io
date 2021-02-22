@@ -1473,3 +1473,48 @@ setOption可以设置多次
   销毁后实例无法再被使用
 
 六、实战 电商平台
+
+​	ajax+echarts
+
+```javascript
+var chartDom = document.getElementById("g11");
+var myChart11 = echarts.init(chartDom);
+var option;
+$.get("../databases/风速数据.json", function (ret) {
+//   console.log(ret);
+  var axisData = [];
+  for (var i = 0; i < ret.length; i++) {
+    // console.log(ret);
+    var time = ret[i].time;
+    var windspeed = ret[i].windspeed;
+    var itemArr = [time, windspeed];
+    axisData.push(itemArr);
+  }
+  console.log(axisData);
+  var option = {
+    title: {
+      text: "风速实时数据",
+    },
+    xAxis: {
+      type: "value",
+      name: "时间[s]"
+    },
+    yAxis: {
+      type: "value",
+      name: "风速[m/s]",
+    },
+    series: [
+      {
+        data: axisData,
+        type: "line",
+        showBackground: true,
+        backgroundStyle: {
+          color: "rgba(180, 180, 180, 0.2)",
+        },
+      },
+    ],
+  };
+  option && myChart11.setOption(option);
+});
+```
+
