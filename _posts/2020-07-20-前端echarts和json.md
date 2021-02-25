@@ -1222,6 +1222,18 @@ colorStops:[
 
 1.监听窗口的大小发生变化事件
 
+```javascript
+window.addEventListener('resize', function () {
+    myChart11.resize();
+    myChart12.resize();
+    myChart13.resize();
+    myChart14.resize();
+    myChart15.resize();
+    myChart16.resize();
+    myChart17.resize();
+})
+```
+
 2.在事件处理函数中调用echarts实例对象resize方法
 
 ```javascript
