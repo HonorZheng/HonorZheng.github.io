@@ -7,7 +7,7 @@ categories: ''
 ---
 # Docker网络配置
 
-###### [Docker高级网络配置快速配置指南](http://www.dockerinfo.net/644.html)
+[Docker高级网络配置快速配置指南](http://www.dockerinfo.net/644.html)
 
 ## 1.阿里云镜像配置
 
@@ -156,5 +156,11 @@ docker: Error response from daemon: User specified IP address is supported on us
 跨主机通信：
 直接路由方式、桥接方式（如pipework）、Overlay隧道方式（如flannel、ovs+gre）
 
+# Docker容器操作
 
+## 1.容器重命名
+
+```dockerfile
+docker rename <my_container> <my_new_container>
+```
 

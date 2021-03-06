@@ -38,72 +38,31 @@ https://mp.weixin.qq.com/s/5fMSpPRq0zqQnzliwAopaQ
 
 ### 3.核心Dockerfile指令
 
-**FROM**
+#### **FROM**
+
 后面放基础镜像，参数是镜像。必须是dockerfile中的第一条非注释指令。
 
 ```dockerfile
 FROM  scratch
 ```
 
-**MAINTAINER**
+#### **MAINTAINER**
+
 指定镜像的作者信息，包含镜像的所有者和联系信息。
 
 ```dockerfile
 MAINTAINER zhengkan<zhengkan1993@gmail.com>
 ```
 
-**RUN**
+#### WORKDIR
 
-1. shell模式
-   `RUN /bin/sh -c command `例如：`RUN echo hello`
-2. exec模式
-   `RUN ["executable","arg1","arg2"] `可以用来指定其他形式的shell运行指令。
-   例如：`RUN["/bin/bash","-c","echo hello"]`
+指定容器运行的语句在哪个路径下
 
-**EXPOSE**
-指定运行该镜像的容器使用的端口。
+```dockerfile
+WORKDIR /app
+```
 
-处于安全考虑，docker并不会打开该端口，而是使用run命令手动的添加对端口的映射。
-
-**CMD**
-用来提供容器运行的默认命令。命令可以被docker run中的指令所覆盖。
-
-即只运行dockerfile中最后一个CMD
-
-- exec模式：`CMD["executable","arg1","arg2"]`
-
-- shell模式：`CMD command arg1,arg2`
-
-  ```dockerfile
-  FROM centos
-  RUN yum install -y curl
-  CMD ['curl','-s','http://ip.cn']
-  ```
-
-**ENTRYPOINT**
-
-与CMD功能一样，但是：
-
-不会被docker run命令中的命指令所覆盖，有它就用它。
-
-- exec模式：`ENTRYPOINT["executable","arg1","arg2"]`
-
-- shell模式：`ENTRYPOINTcommand arg1,arg2`
-
-  ```dockerfile
-  FROM centos
-  RUN yum install -y curl
-  CMD ['curl','-s','http://ip.cn']
-  ENTRYPOINT -i
-  ```
-
-  相当于将 -i 命令插入到 中，如果使用CMD添加-i功能，会被覆盖，不能成功添加；使用ENTRYPOINT可以直接加入并实现。
-
-  ```
-  curl -s -i  http://ip.cn
-  ```
-
-**ADD**
+#### **ADD**
 
 ```dockerfile
 ADD ["SRC","DEST"]
@@ -112,12 +71,18 @@ ADD /predict_sales /task01
 
 - [x] 拷贝+解压缩
 
-  【相当于把SRC文件夹内的内容copy到DEST文件夹中】，比copy命令强大
+  【相当于把SRC文件夹内的内容copy到DEST文件夹中】，比copy命令强大，因为可以使用url
 
 
   注：src可以是本地也可以是远程的文件，dest必须是镜像中的绝对路径
 
 **COPY**
+
+将本地文件拷贝到容器中，下面就是将本地 **/SRC** 文件夹拷贝到容器 **/app**文件夹中
+
+```
+COPY /SRC /app
+```
 
 ```
 COPY["SRC","DEST"]
@@ -144,6 +109,71 @@ docker cp 96f7f14e99ab:/www /tmp/
 ADD包含类似tar的解压功能；
 如果单纯复制文件，Docker推荐使用COPY。
 
+#### **RUN**
+
+1. shell模式
+   `RUN /bin/sh -c command `例如：`RUN echo hello`
+2. exec模式
+   `RUN ["executable","arg1","arg2"] `可以用来指定其他形式的shell运行指令。
+   例如：`RUN["/bin/bash","-c","echo hello"]`
+
+```dockerfile
+RUN echo 321 >> 1.txt
+```
+
+​	RUN语句在docker构建镜像的过程中就直接执行。
+
+#### **CMD**
+
+用来提供容器运行的默认命令。命令可以被docker run中的指令所覆盖。
+
+即只运行dockerfile中最后一个CMD
+
+- exec模式：`CMD["executable","arg1","arg2"]`
+
+- shell模式：`CMD command arg1,arg2`
+
+  ```dockerfile
+  FROM centos
+  RUN yum install -y curl
+  CMD ['curl','-s','http://ip.cn']
+  ```
+
+#### **ENTRYPOINT**
+
+与CMD功能一样，但是：
+
+不会被docker run命令中的命指令所覆盖，有它就用它。
+
+- exec模式：`ENTRYPOINT["executable","arg1","arg2"]`
+
+- shell模式：`ENTRYPOINTcommand arg1,arg2`
+
+  ```dockerfile
+  FROM centos
+  RUN yum install -y curl
+  CMD ['curl','-s','http://ip.cn']
+  ENTRYPOINT -i
+  ```
+
+  相当于将 -i 命令插入到 中，如果使用CMD添加-i功能，会被覆盖，不能成功添加；使用ENTRYPOINT可以直接加入并实现。
+
+  ```
+  curl -s -i  http://ip.cn
+  ```
+  
+  **>>>对比ENTRYPOINT和CMD<<< **
+  
+  如果**ENTRYPOINT**为非json格式，则以**ENTRYPOINT**为准； CMD无效；
+  
+  如果**ENTRYPOINT**是json格式，则将**ENTRYPOINT**与CMD合并执行。
+
+#### **EXPOSE**
+
+​	指定运行该镜像的容器使用的端口。
+
+​	处于安全考虑，docker并不会打开该端口，而是使用run命令手动的添加对端口的映射。
+
 **VOLUME**
 
 容器数据卷，用于数据的保存和持久化
@@ -163,6 +193,8 @@ $ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
 ```
 
 主要可用于主机与宿主机的数据同步，步骤如下：
+
+
 
 1. 容器先停止退出，使用docker stop containerID
 
@@ -197,45 +229,52 @@ $ docker run -it -v /宿主机绝对路径:/容器内目录 <image_name>
    `ro` - Read Only, 只读
 
    在 container 中 执行 `touch container.txt` 会返回错误信息
-   
-   --------------------------------------------------------------
-   
-   ## Docker 挂载目录
-   
-   挂载目录后镜像内就可以共享宿主机里的文件
-   
-   通过 run -v 参数指定挂载目录(格式：宿主机目录:镜像内挂载目录)，如果宿主机目录不存在则创建
-   
-   Centos7 中本地挂载的目录在容器中没有执行权限，通过 --privileged=true 给容器加特权
-   
-   下面以 centos 镜像为例：
-   
-   1. 通过 Centos 镜像运行一个容器，并设置挂载目录
-   
-   
-   
-   ```kotlin
-   docker run -it -v /home/linyuan/Downloads/data:/data centos
-   ```
-   
-   1. 此时可看到宿主机上 /home/linyuan/Downloads 文件夹下多出了 /data 目录
-   
-   2. 因为通过 -it 参数，已进入容器内部，通过 ls -a 命令查看文件夹，可看见多出 /data 目录，通过 cd 命令进入文件夹下并新建文件 touch a.txt
-   
-   3. 可看见宿主机 /data 目录也会存在该文件
-   
-      --------------------------------------------------------------
 
-**WORKDIR**
+## Docker生成镜像
+
+#### **docker build** 
+
+命令用于使用 Dockerfile 创建镜像。
 
 ```dockerfile
-WORKDIR /PATH
-WORKDIR $MY_PATH
+docker build -f /path/to/a/Dockerfile .
 ```
 
-指定登录后的工作目录。
+一般通过文件来创建docker镜像，注意后面的点号，不能省略。
 
-**ENV**
+## Docker端口映射
+
+5000端口映射到宿主机8000端口，外部通过8000端口访问
+
+```dockerfile
+docker run -it -p 5000:8000 first
+```
+
+## Docker 挂载目录
+
+挂载目录后镜像内就可以共享宿主机里的文件
+
+通过 run -v 参数指定挂载目录(格式：宿主机目录:镜像内挂载目录)，如果宿主机目录不存在则创建
+
+Centos7 中本地挂载的目录在容器中没有执行权限，通过 --privileged=true 给容器加特权
+
+下面以 centos 镜像为例：
+
+1. 通过 Centos 镜像运行一个容器，并设置挂载目录
+
+```kotlin
+docker run -it -v /home/linyuan/Downloads/data:/data centos
+```
+
+1. 此时可看到宿主机上 /home/linyuan/Downloads 文件夹下多出了 /data 目录
+
+2. 因为通过 -it 参数，已进入容器内部，通过 ls -a 命令查看文件夹，可看见多出 /data 目录，通过 cd 命令进入文件夹下并新建文件 touch a.txt
+
+3. 可看见宿主机 /data 目录也会存在该文件
+
+   --------------------------------------------------------------
+
+#### **ENV**
 
 ```dockerfile
 ENV <key>=<value>
@@ -244,10 +283,12 @@ ENV $MY_PATH/workdir
 
 一般用于指定环境变量。
 
-**USER USER daemon**
+#### **USER USER daemon**
+
 指定镜像为某个用户/用户组运行。默认使用root用户。
 
-**ONBUILD**
+#### **ONBUILD**
+
 `ONBUILD [INSTRUCTION]`
 为镜像添加触发器，当一个镜像作为其他镜像的基础镜像时，触发器会执行。
 
@@ -338,3 +379,17 @@ https://zhuanlan.zhihu.com/p/45625808
 https://zhenye-na.github.io/2019/09/29/docker-practical-guide.html 【写的很好】
 
 视频参考https://www.bilibili.com/video/BV1Vs411E7AR?from=search&seid=1856349726122122768
+
+## Docker 用户组添加
+
+通过将用户添加到docker用户组可以将sudo去掉，命令如下
+
+```
+
+sudo groupadd docker #添加docker用户组
+
+sudo gpasswd -a $USER docker #将登陆用户加入到docker用户组中
+
+newgrp docker #更新用户组
+```
+
