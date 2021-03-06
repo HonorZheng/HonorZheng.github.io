@@ -164,3 +164,17 @@ docker: Error response from daemon: User specified IP address is supported on us
 docker rename <my_container> <my_new_container>
 ```
 
+## 2.删除容器
+
+​	删除所有容器
+
+```
+docker rm $(docker ps -a -q)
+```
+
+​	删除所有镜像
+
+```
+ docker rmi -f $(docker images -q)
+```
+
