@@ -4,6 +4,73 @@
 
 数据库是将大量数据保存起来，通过计算机加工而成的可以进行高效访问的数据集合。该数据集合称为数据库（Database，DB）。用来管理数据库的计算机系统称为数据库管理系统（Database Management System，DBMS）。
 
+### 0.0.0 创建用户
+
+1. 创建普通用户
+
+```mysql
+create user zhengkan identified by 'zhengkan123456';
+CREATE USER  'user_name'@'host'  IDENTIFIED BY  'password'；
+```
+
+	注意:
+	用户:zhengkan
+	密码: zhengkan123456
+user_name：要创建用户的名字。
+
+host：表示要这个新创建的用户允许从哪台机登陆，如果只允许从本机登陆，则 填　‘localhost’ ，如果允许从远程登陆，则填 ‘%’
+
+password：新创建用户的登陆数据库密码，如果没密码可以不写。
+
+2. 赋权
+
+```mysql
+grant all on *.* to 'zhengkan' with grant option;
+```
+
+注： 1.这是把所有的权限授权给这个用户并允许这个用户给其他用户授权,[ with grant option ] 代表此用户可以给其他用户授权  
+
+​        2.如果不想授予所有权限可以在on 后面写 [ select 数据库名.表名 ]，代表授予这个数据库下这个表的查询权限
+
+3. 刷新数据库
+
+```mysql
+flush privileges;	
+```
+
+​	4.查看
+
+```mysql
+use mysql;
+select host,user,password from  user ;
+```
+
+​	5.删除
+
+```mysql
+DROP  USER 'user_name'@'host'
+```
+
+```mysql
+DROP USER 'aaa'@''%'';//表示删除用户aaa；
+```
+
+6. 设置与更改用户密码
+
+```mysql
+SET  PASSWORD  FOR  'username'@'host' = PASSWORD('newpassword');
+```
+
+如果是设置当前用户的密码：
+
+```mysql
+SET  PASSWORD = PASSWORD('newpassword');
+如
+SET  PASSWORD = PASSWORD('123456');
+```
+
+
+
 ### 1.1.1 DBMS的种类
 
 DBMS 主要通过数据的保存格式（数据库的种类）来进行分类，现阶段主要有以下 5 种类型.

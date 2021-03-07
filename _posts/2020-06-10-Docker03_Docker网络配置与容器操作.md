@@ -178,3 +178,9 @@ docker rm $(docker ps -a -q)
  docker rmi -f $(docker images -q)
 ```
 
+## 3.查看容器运行日志
+
+```
+docker logs 容器名
+```
+
