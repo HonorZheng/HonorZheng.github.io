@@ -244,6 +244,16 @@ docker build -f /path/to/a/Dockerfile .
 
 ## Docker端口映射
 
+#### dockr exec
+
+进入容器内部
+
+```
+docker exec -it 容器名 /bin/bash
+```
+
+#### docker run 
+
 5000端口映射到宿主机8000端口，外部通过8000端口访问
 
 ```dockerfile
